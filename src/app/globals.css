@@ -108,3 +108,22 @@ body {
 .animate-particle-rise {
   animation: particle-rise linear infinite;
 }
+
+@keyframes tilt-3d {
+  0%, 100% { transform: perspective(800px) rotateX(8deg) rotateY(-6deg) rotateZ(0deg); }
+  50% { transform: perspective(800px) rotateX(-6deg) rotateY(8deg) rotateZ(4deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.06); }
+}
+
+.animate-tilt-3d {
+  animation: tilt-3d 12s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 6s ease-in-out infinite;
+}

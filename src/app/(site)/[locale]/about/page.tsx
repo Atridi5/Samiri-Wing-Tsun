@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
@@ -24,15 +23,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   return (
     <>
       <section className="relative isolate flex min-h-[50vh] items-center overflow-hidden bg-navy-950">
-        <Image
-          src="/images/hero-dark-dummy.jpg"
-          alt="Samir Wing Tsun System"
-          fill
-          priority
-          className="object-cover object-center opacity-40"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-950/80 via-navy-950/70 to-navy-950" />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-900 via-navy-950 to-navy-950" />
         <AboutHeroBackground />
         <div className="relative mx-auto max-w-4xl px-6 py-24 text-center">
           <p className="section-eyebrow text-xs font-semibold uppercase text-gold-400">{t("sectionLabel")}</p>
