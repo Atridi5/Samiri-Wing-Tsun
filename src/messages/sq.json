@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "home": "Ballina",
+    "about": "Rreth Nesh",
+    "programs": "Programet",
+    "gallery": "Galeria",
+    "location": "Lokacioni",
+    "contact": "Kontakt",
+    "cta": "Regjistrohu"
+  },
+  "hero": {
+    "ctaPrimary": "Regjistrohu Tani",
+    "ctaSecondary": "Mëso Më Shumë",
+    "badge": "Ferizaj, Kosovë"
+  },
+  "comparison": {
+    "vs": "VS"
+  },
+  "programs": {
+    "sectionLabel": "Programet"
+  },
+  "why": {
+    "sectionLabel": "Pse Wing Tsun"
+  },
+  "gallery": {
+    "sectionLabel": "Galeria"
+  },
+  "testimonials": {
+    "sectionLabel": "Çfarë Thonë Anëtarët Tanë"
+  },
+  "location": {
+    "sectionLabel": "Lokacioni",
+    "getDirections": "Merr Udhëzime",
+    "addressLabel": "Adresa",
+    "phoneLabel": "Telefoni",
+    "instructorLabel": "Instruktor"
+  },
+  "contact": {
+    "sectionLabel": "Na Kontaktoni",
+    "name": "Emri",
+    "email": "Email",
+    "phone": "Telefoni",
+    "message": "Mesazhi",
+    "send": "Dërgo Mesazhin",
+    "sending": "Duke dërguar...",
+    "success": "Faleminderit! Mesazhi juaj u dërgua me sukses.",
+    "error": "Diçka shkoi keq. Provoni përsëri."
+  },
+  "register": {
+    "eyebrow": "Samir Wing Tsun System",
+    "title": "Regjistrohu",
+    "subtitle": "Plotëso të dhënat dhe stafi ynë do të të kontaktojë për orarin dhe fillimin e stërvitjes.",
+    "name": "Emri",
+    "phone": "Telefoni",
+    "email": "Email (opsionale)",
+    "program": "Programi",
+    "programPlaceholder": "Zgjidh programin",
+    "programKids": "Kids (Fëmijë)",
+    "programTeens": "Të Rinj",
+    "programAdults": "Të Rritur",
+    "programTrial": "Orë Provë (nuk jam i sigurt)",
+    "sectionPersonal": "Të Dhënat Personale",
+    "sectionTraining": "Detajet e Stërvitjes",
+    "sectionEmergency": "Kontakti i Urgjencës & Shëndeti",
+    "age": "Mosha (opsionale)",
+    "address": "Adresa (opsionale)",
+    "experience": "Përvoja Paraprake",
+    "experiencePlaceholder": "Zgjidh nivelin",
+    "experienceNone": "Pa përvojë",
+    "experienceBeginner": "Fillestar",
+    "experienceIntermediate": "Mesatar",
+    "experienceAdvanced": "I Përparuar",
+    "preferredSchedule": "Orari i Preferuar",
+    "schedulePlaceholder": "Zgjidh orarin",
+    "scheduleMorning": "Paradite",
+    "scheduleAfternoon": "Pasdite",
+    "scheduleEvening": "Mbrëmje",
+    "scheduleFlexible": "Fleksibël",
+    "heardFrom": "Si na gjetët?",
+    "heardFromPlaceholder": "Zgjidh një opsion",
+    "heardInstagram": "Instagram",
+    "heardFacebook": "Facebook",
+    "heardTiktok": "TikTok",
+    "heardFriend": "Mik/Familje",
+    "heardGoogle": "Google",
+    "heardOther": "Tjetër",
+    "emergencyContactName": "Emri i Kontaktit të Urgjencës",
+    "emergencyContactPhone": "Telefoni i Kontaktit të Urgjencës",
+    "healthNotes": "Shënime Shëndetësore / Lëndime",
+    "healthNotesPlaceholder": "P.sh. alergji, lëndime paraprake, kushte shëndetësore...",
+    "message": "Mesazh (opsionale)",
+    "submit": "Dërgo Regjistrimin",
+    "sending": "Duke dërguar...",
+    "successTitle": "Faleminderit!",
+    "successBody": "Regjistrimi u dërgua me sukses. Do të kontaktoheni së shpejti nga stafi ynë.",
+    "close": "Mbyll",
+    "error": "Diçka shkoi keq. Provoni përsëri."
+  },
+  "footer": {
+    "rights": "Të gjitha të drejtat e rezervuara.",
+    "quickLinks": "Lidhje të Shpejta",
+    "followUs": "Na Ndiqni",
+    "contactInfo": "Informata Kontakti"
+  },
+  "language": {
+    "sq": "Shqip",
+    "en": "Anglisht",
+    "de": "Gjermanisht"
+  },
+  "admin": {
+    "loginTitle": "Admin Panel",
+    "loginSubtitle": "Kyçu për të menaxhuar faqen",
+    "username": "Emri i përdoruesit",
+    "password": "Fjalëkalimi",
+    "login": "Kyçu",
+    "loginError": "Emri i përdoruesit ose fjalëkalimi është i pasaktë",
+    "logout": "Dilni",
+    "dashboard": "Paneli",
+    "backToSite": "Shiko Faqen"
+  }
+}

@@ -1,0 +1,331 @@
+import "dotenv/config";
+import { PrismaClient } from "@prisma/client";
+import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+import bcrypt from "bcryptjs";
+import path from "node:path";
+
+const dbUrl = process.env.DATABASE_URL ?? "file:./prisma/dev.db";
+const resolvedPath = path.join(process.cwd(), dbUrl.replace(/^file:/, ""));
+const adapter = new PrismaBetterSqlite3({ url: resolvedPath });
+const prisma = new PrismaClient({ adapter });
+
+type Locale = "sq" | "en" | "de";
+
+async function upsertSiteText(
+  section: string,
+  values: Record<Locale, { title?: string; subtitle?: string; body?: string }>
+) {
+  for (const locale of Object.keys(values) as Locale[]) {
+    const v = values[locale];
+    await prisma.siteText.upsert({
+      where: { section_locale: { section, locale } },
+      update: { title: v.title, subtitle: v.subtitle, body: v.body },
+      create: { section, locale, title: v.title, subtitle: v.subtitle, body: v.body },
+    });
+  }
+}
+
+async function main() {
+  // ---------- Admin user ----------
+  const username = process.env.ADMIN_USERNAME ?? "admin";
+  const password = process.env.ADMIN_PASSWORD ?? "WingTsun2026!";
+  const passwordHash = await bcrypt.hash(password, 12);
+  await prisma.adminUser.upsert({
+    where: { username },
+    update: {},
+    create: { username, passwordHash },
+  });
+
+  // ---------- Site texts ----------
+  await upsertSiteText("hero", {
+    sq: {
+      title: "SAMIR WING TSUN SYSTEM",
+      subtitle: "Trajno trupin. Forco mendjen. Jeto pa limit.",
+      body: "Më shumë se një sport — një rrugë për jetën. Mëso artin e vetëmbrojtjes Wing Tsun në Ferizaj, nën udhëheqjen e Sifu Samir Ibishi.",
+    },
+    en: {
+      title: "SAMIR WING TSUN SYSTEM",
+      subtitle: "Train the body. Strengthen the mind. Live without limits.",
+      body: "More than a sport — a way of life. Learn the art of Wing Tsun self-defense in Ferizaj, led by Sifu Samir Ibishi.",
+    },
+    de: {
+      title: "SAMIR WING TSUN SYSTEM",
+      subtitle: "Trainiere den Körper. Stärke den Geist. Lebe ohne Limit.",
+      body: "Mehr als ein Sport — ein Weg fürs Leben. Erlerne die Kunst der Wing-Tsun-Selbstverteidigung in Ferizaj unter der Leitung von Sifu Samir Ibishi.",
+    },
+  });
+
+  await upsertSiteText("intro", {
+    sq: {
+      title: "Arti i thjeshtë. Efektiv. Për jetë.",
+      body: "Dëshiron të mbrosh veten dhe të tjerët në situata të ndryshme? Wing Tsun System ofron mbrojtje efektive, reflekse të shpejta, trup të fortë e mendje të qetë — për çdo moshë. Trajnim i vërtetë, rezultate të vërteta.",
+    },
+    en: {
+      title: "The simple art. Effective. For life.",
+      body: "Do you want to protect yourself and others in different situations? Wing Tsun System offers effective defense, fast reflexes, a strong body and a calm mind — for every age. Real training, real results.",
+    },
+    de: {
+      title: "Die einfache Kunst. Effektiv. Fürs Leben.",
+      body: "Möchtest du dich und andere in verschiedenen Situationen schützen? Wing Tsun System bietet effektiven Schutz, schnelle Reflexe, einen starken Körper und einen ruhigen Geist — für jedes Alter. Echtes Training, echte Ergebnisse.",
+    },
+  });
+
+  await upsertSiteText("why", {
+    sq: {
+      title: "Wing Tsun nuk është vetëm sport, është një jetë më e mirë!",
+      body: "Në Ferizaj, ne ndërtojmë një brez të ri — të fortë në trup, të qetë në mendje dhe të drejtë në karakter.",
+    },
+    en: {
+      title: "Wing Tsun is not just a sport, it's a better life!",
+      body: "In Ferizaj, we are building a new generation — strong in body, calm in mind and upright in character.",
+    },
+    de: {
+      title: "Wing Tsun ist nicht nur ein Sport, es ist ein besseres Leben!",
+      body: "In Ferizaj bauen wir eine neue Generation auf — stark im Körper, ruhig im Geist und aufrichtig im Charakter.",
+    },
+  });
+
+  await upsertSiteText("comparison", {
+    sq: { title: "Njerëzit Pasiv", subtitle: "Njerëzit Aktiv" },
+    en: { title: "Passive People", subtitle: "Active People" },
+    de: { title: "Passive Menschen", subtitle: "Aktive Menschen" },
+  });
+
+  await upsertSiteText("programs", {
+    sq: { title: "Programet Tona", body: "Trajnime të përshtatura për çdo grupmoshë — nga fëmijët deri te të rriturit." },
+    en: { title: "Our Programs", body: "Training tailored for every age group — from kids to adults." },
+    de: { title: "Unsere Programme", body: "Training für jede Altersgruppe — von Kindern bis Erwachsenen." },
+  });
+
+  await upsertSiteText("kids_section", {
+    sq: {
+      title: "Largohen nga telefoni dhe rrjetet sociale!",
+      body: "Sporti i largon fëmijët nga ekrani dhe i motivon të jetojnë aktiv, të socializohen dhe të krijojnë miqësi të vërteta. Rrit energjinë dhe fokusimin!",
+    },
+    en: {
+      title: "Away from phones and social media!",
+      body: "Sport pulls kids away from screens and motivates them to live actively, socialize and build real friendships. It boosts energy and focus!",
+    },
+    de: {
+      title: "Weg von Handy und sozialen Medien!",
+      body: "Sport bringt Kinder weg vom Bildschirm und motiviert sie, aktiv zu leben, sich zu sozialisieren und echte Freundschaften zu schließen. Er steigert Energie und Fokus!",
+    },
+  });
+
+  await upsertSiteText("gallery", {
+    sq: { title: "Galeria", body: "Momente nga trajnimet tona." },
+    en: { title: "Gallery", body: "Moments from our training sessions." },
+    de: { title: "Galerie", body: "Momente aus unserem Training." },
+  });
+
+  await upsertSiteText("location", {
+    sq: { title: "Na Gjeni", body: "Ejani të na vizitoni në qendrën tonë të stërvitjes në Ferizaj." },
+    en: { title: "Find Us", body: "Come visit us at our training center in Ferizaj." },
+    de: { title: "Finden Sie Uns", body: "Besuchen Sie uns in unserem Trainingszentrum in Ferizaj." },
+  });
+
+  await upsertSiteText("cta", {
+    sq: { title: "Disiplinë sot, sukses nesër!", subtitle: "Bëhu versioni më i mirë i vetes.", body: "Regjistrohu sot dhe fillo udhëtimin tënd në Wing Tsun." },
+    en: { title: "Discipline today, success tomorrow!", subtitle: "Become the best version of yourself.", body: "Sign up today and start your Wing Tsun journey." },
+    de: { title: "Disziplin heute, Erfolg morgen!", subtitle: "Werde die beste Version von dir selbst.", body: "Melde dich noch heute an und beginne deine Wing-Tsun-Reise." },
+  });
+
+  await upsertSiteText("footer", {
+    sq: { body: "Të gjitha të drejtat e rezervuara." },
+    en: { body: "All rights reserved." },
+    de: { body: "Alle Rechte vorbehalten." },
+  });
+
+  // ---------- Programs ----------
+  const programsData: {
+    slug: string;
+    icon: string;
+    order: number;
+    t: Record<Locale, { title: string; description: string }>;
+  }[] = [
+    {
+      slug: "kids",
+      icon: "sparkles",
+      order: 1,
+      t: {
+        sq: { title: "Kids", description: "Disiplinë, respekt dhe vetëbesim që nga mosha e hershme, në një mjedis argëtues e të sigurt." },
+        en: { title: "Kids", description: "Discipline, respect and self-confidence from an early age, in a fun and safe environment." },
+        de: { title: "Kids", description: "Disziplin, Respekt und Selbstvertrauen von klein auf, in einer sicheren und spaßigen Umgebung." },
+      },
+    },
+    {
+      slug: "teens",
+      icon: "target",
+      order: 2,
+      t: {
+        sq: { title: "Të Rinj", description: "Zhvillim fizik e mendor, fokus dhe mbrojtje efektive për adoleshentët." },
+        en: { title: "Teens", description: "Physical and mental development, focus and effective self-defense for teenagers." },
+        de: { title: "Jugendliche", description: "Körperliche und geistige Entwicklung, Fokus und effektive Selbstverteidigung für Jugendliche." },
+      },
+    },
+    {
+      slug: "adults",
+      icon: "shield",
+      order: 3,
+      t: {
+        sq: { title: "Të Rritur", description: "Kondicion fizik, çlirim nga stresi dhe teknika reale vetëmbrojtjeje për jetën e përditshme." },
+        en: { title: "Adults", description: "Physical conditioning, stress relief and real self-defense techniques for everyday life." },
+        de: { title: "Erwachsene", description: "Fitness, Stressabbau und reale Selbstverteidigungstechniken für den Alltag." },
+      },
+    },
+  ];
+
+  for (const p of programsData) {
+    const program = await prisma.program.upsert({
+      where: { slug: p.slug },
+      update: { icon: p.icon, order: p.order },
+      create: { slug: p.slug, icon: p.icon, order: p.order },
+    });
+    for (const locale of Object.keys(p.t) as Locale[]) {
+      await prisma.programTranslation.upsert({
+        where: { programId_locale: { programId: program.id, locale } },
+        update: p.t[locale],
+        create: { programId: program.id, locale, ...p.t[locale] },
+      });
+    }
+  }
+
+  // ---------- Benefits: active vs passive comparison ----------
+  const passive: Record<Locale, string[]> = {
+    sq: [
+      "Lodhje dhe energji e ulët",
+      "Stres dhe ankth i shtuar",
+      "Rrezik i sëmundjeve të zemrës",
+      "Mbipeshë dhe diabet",
+      "Imunitet i dobët",
+      "Vetëbesim i ulët",
+      "Jetë më e shkurtër",
+      "Asnjë kontroll mbi veten",
+    ],
+    en: [
+      "Fatigue and low energy",
+      "Increased stress and anxiety",
+      "Risk of heart disease",
+      "Overweight and diabetes",
+      "Weak immunity",
+      "Low self-confidence",
+      "Shorter life",
+      "No control over yourself",
+    ],
+    de: [
+      "Müdigkeit und wenig Energie",
+      "Erhöhter Stress und Angst",
+      "Risiko für Herzkrankheiten",
+      "Übergewicht und Diabetes",
+      "Schwaches Immunsystem",
+      "Geringes Selbstvertrauen",
+      "Kürzeres Leben",
+      "Keine Kontrolle über sich selbst",
+    ],
+  };
+  const active: Record<Locale, string[]> = {
+    sq: [
+      "Energji e lartë dhe vitalitet",
+      "Mendje e qetë dhe e fokusuar",
+      "Zemër e shëndetshme",
+      "Peshë e kontrolluar",
+      "Imunitet i fortë",
+      "Vetëbesim dhe disiplinë",
+      "Jetë më e gjatë dhe cilësore",
+      "Arrij qëllimet e tua",
+      "Vetëmbrojtje në çdo hap",
+    ],
+    en: [
+      "High energy and vitality",
+      "Calm and focused mind",
+      "Healthy heart",
+      "Controlled weight",
+      "Strong immunity",
+      "Self-confidence and discipline",
+      "Longer, quality life",
+      "Achieve your goals",
+      "Self-defense at every step",
+    ],
+    de: [
+      "Hohe Energie und Vitalität",
+      "Ruhiger, fokussierter Geist",
+      "Gesundes Herz",
+      "Kontrolliertes Gewicht",
+      "Starkes Immunsystem",
+      "Selbstvertrauen und Disziplin",
+      "Längeres, hochwertiges Leben",
+      "Erreiche deine Ziele",
+      "Selbstverteidigung bei jedem Schritt",
+    ],
+  };
+  const whyTrain: Record<Locale, string[]> = {
+    sq: ["Mbrojtje Efektive", "Reflekse të Shpejta", "Trup i Fortë, Mendje e Qetë", "Për Çdo Moshë"],
+    en: ["Effective Protection", "Fast Reflexes", "Strong Body, Calm Mind", "For Every Age"],
+    de: ["Effektiver Schutz", "Schnelle Reflexe", "Starker Körper, Ruhiger Geist", "Für Jedes Alter"],
+  };
+
+  async function seedBenefitGroup(category: string, icons: string[], data: Record<Locale, string[]>) {
+    const count = data.sq.length;
+    for (let i = 0; i < count; i++) {
+      const benefit = await prisma.benefit.create({
+        data: { category, icon: icons[i % icons.length], order: i },
+      });
+      for (const locale of Object.keys(data) as Locale[]) {
+        await prisma.benefitTranslation.create({
+          data: { benefitId: benefit.id, locale, text: data[locale][i] },
+        });
+      }
+    }
+  }
+
+  const existingBenefits = await prisma.benefit.count();
+  if (existingBenefits === 0) {
+    await seedBenefitGroup("passive", ["frown", "brain", "heart", "scale", "shield-off", "trending-down", "clock", "x-circle"], passive);
+    await seedBenefitGroup("active", ["zap", "brain", "heart", "scale", "shield-check", "trending-up", "clock", "target", "users"], active);
+    await seedBenefitGroup("why", ["shield-check", "wind", "brain-circuit", "users"], whyTrain);
+  }
+
+  // ---------- Contact info ----------
+  await prisma.contactInfo.upsert({
+    where: { id: "main" },
+    update: {},
+    create: {
+      id: "main",
+      address: "Rr. Sinan Sahiti 79",
+      city: "Ferizaj, Kosovë",
+      phone: "048 880 404",
+      email: "info@samirwingtsun.com",
+      instagram: "https://instagram.com",
+      facebook: "https://facebook.com",
+      mapEmbedUrl:
+        "https://www.google.com/maps?q=" +
+        encodeURIComponent("Rr. Sinan Sahiti 79, Ferizaj, Kosovo") +
+        "&output=embed",
+    },
+  });
+
+  // ---------- Gallery ----------
+  const galleryCount = await prisma.galleryImage.count();
+  if (galleryCount === 0) {
+    const images = [
+      { url: "/images/hero-training.jpg", caption: "Trajnim Wing Tsun" },
+      { url: "/images/hero-dark-dummy.jpg", caption: "Mok Yan Jong — Kukulla e drurit" },
+      { url: "/images/kids-training.jpg", caption: "Trajnim për fëmijë" },
+      { url: "/images/flyer-light.jpg", caption: "Samir Wing Tsun System, Ferizaj" },
+    ];
+    for (let i = 0; i < images.length; i++) {
+      await prisma.galleryImage.create({ data: { ...images[i], order: i } });
+    }
+  }
+
+  console.log("Seed complete. Admin login ->", username, "/", password);
+}
+
+main()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

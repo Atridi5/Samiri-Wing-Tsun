@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "programs": "Programs",
+    "gallery": "Gallery",
+    "location": "Location",
+    "contact": "Contact",
+    "cta": "Join Now"
+  },
+  "hero": {
+    "ctaPrimary": "Join Now",
+    "ctaSecondary": "Learn More",
+    "badge": "Ferizaj, Kosovo"
+  },
+  "comparison": {
+    "vs": "VS"
+  },
+  "programs": {
+    "sectionLabel": "Programs"
+  },
+  "why": {
+    "sectionLabel": "Why Wing Tsun"
+  },
+  "gallery": {
+    "sectionLabel": "Gallery"
+  },
+  "testimonials": {
+    "sectionLabel": "What Our Members Say"
+  },
+  "location": {
+    "sectionLabel": "Location",
+    "getDirections": "Get Directions",
+    "addressLabel": "Address",
+    "phoneLabel": "Phone",
+    "instructorLabel": "Instructor"
+  },
+  "contact": {
+    "sectionLabel": "Contact Us",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Thank you! Your message has been sent successfully.",
+    "error": "Something went wrong. Please try again."
+  },
+  "register": {
+    "eyebrow": "Samir Wing Tsun System",
+    "title": "Join Now",
+    "subtitle": "Fill in your details and our team will contact you about schedules and getting started.",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email (optional)",
+    "program": "Program",
+    "programPlaceholder": "Choose a program",
+    "programKids": "Kids",
+    "programTeens": "Teens",
+    "programAdults": "Adults",
+    "programTrial": "Trial class (not sure yet)",
+    "sectionPersonal": "Personal Details",
+    "sectionTraining": "Training Details",
+    "sectionEmergency": "Emergency Contact & Health",
+    "age": "Age (optional)",
+    "address": "Address (optional)",
+    "experience": "Prior Experience",
+    "experiencePlaceholder": "Choose a level",
+    "experienceNone": "No experience",
+    "experienceBeginner": "Beginner",
+    "experienceIntermediate": "Intermediate",
+    "experienceAdvanced": "Advanced",
+    "preferredSchedule": "Preferred Schedule",
+    "schedulePlaceholder": "Choose a schedule",
+    "scheduleMorning": "Morning",
+    "scheduleAfternoon": "Afternoon",
+    "scheduleEvening": "Evening",
+    "scheduleFlexible": "Flexible",
+    "heardFrom": "How did you hear about us?",
+    "heardFromPlaceholder": "Choose an option",
+    "heardInstagram": "Instagram",
+    "heardFacebook": "Facebook",
+    "heardTiktok": "TikTok",
+    "heardFriend": "Friend/Family",
+    "heardGoogle": "Google",
+    "heardOther": "Other",
+    "emergencyContactName": "Emergency Contact Name",
+    "emergencyContactPhone": "Emergency Contact Phone",
+    "healthNotes": "Health Notes / Injuries",
+    "healthNotesPlaceholder": "e.g. allergies, prior injuries, medical conditions...",
+    "message": "Message (optional)",
+    "submit": "Send Registration",
+    "sending": "Sending...",
+    "successTitle": "Thank you!",
+    "successBody": "Your registration was sent successfully. Our team will contact you shortly.",
+    "close": "Close",
+    "error": "Something went wrong. Please try again."
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "quickLinks": "Quick Links",
+    "followUs": "Follow Us",
+    "contactInfo": "Contact Info"
+  },
+  "language": {
+    "sq": "Albanian",
+    "en": "English",
+    "de": "German"
+  },
+  "admin": {
+    "loginTitle": "Admin Panel",
+    "loginSubtitle": "Sign in to manage the website",
+    "username": "Username",
+    "password": "Password",
+    "login": "Sign In",
+    "loginError": "Invalid username or password",
+    "logout": "Log Out",
+    "dashboard": "Dashboard",
+    "backToSite": "View Site"
+  }
+}

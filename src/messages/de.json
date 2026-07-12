@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "about": "Über Uns",
+    "programs": "Programme",
+    "gallery": "Galerie",
+    "location": "Standort",
+    "contact": "Kontakt",
+    "cta": "Jetzt Anmelden"
+  },
+  "hero": {
+    "ctaPrimary": "Jetzt Anmelden",
+    "ctaSecondary": "Mehr Erfahren",
+    "badge": "Ferizaj, Kosovo"
+  },
+  "comparison": {
+    "vs": "VS"
+  },
+  "programs": {
+    "sectionLabel": "Programme"
+  },
+  "why": {
+    "sectionLabel": "Warum Wing Tsun"
+  },
+  "gallery": {
+    "sectionLabel": "Galerie"
+  },
+  "testimonials": {
+    "sectionLabel": "Was Unsere Mitglieder Sagen"
+  },
+  "location": {
+    "sectionLabel": "Standort",
+    "getDirections": "Route Anzeigen",
+    "addressLabel": "Adresse",
+    "phoneLabel": "Telefon",
+    "instructorLabel": "Trainer"
+  },
+  "contact": {
+    "sectionLabel": "Kontaktiere Uns",
+    "name": "Name",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "message": "Nachricht",
+    "send": "Nachricht Senden",
+    "sending": "Wird gesendet...",
+    "success": "Danke! Ihre Nachricht wurde erfolgreich gesendet.",
+    "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+  },
+  "register": {
+    "eyebrow": "Samir Wing Tsun System",
+    "title": "Jetzt Anmelden",
+    "subtitle": "Fülle deine Daten aus und unser Team kontaktiert dich bezüglich Zeitplan und Einstieg.",
+    "name": "Name",
+    "phone": "Telefon",
+    "email": "E-Mail (optional)",
+    "program": "Programm",
+    "programPlaceholder": "Programm wählen",
+    "programKids": "Kids",
+    "programTeens": "Jugendliche",
+    "programAdults": "Erwachsene",
+    "programTrial": "Probestunde (noch unsicher)",
+    "sectionPersonal": "Persönliche Daten",
+    "sectionTraining": "Trainingsdetails",
+    "sectionEmergency": "Notfallkontakt & Gesundheit",
+    "age": "Alter (optional)",
+    "address": "Adresse (optional)",
+    "experience": "Vorerfahrung",
+    "experiencePlaceholder": "Level wählen",
+    "experienceNone": "Keine Erfahrung",
+    "experienceBeginner": "Anfänger",
+    "experienceIntermediate": "Fortgeschritten",
+    "experienceAdvanced": "Erfahren",
+    "preferredSchedule": "Bevorzugter Zeitplan",
+    "schedulePlaceholder": "Zeitplan wählen",
+    "scheduleMorning": "Vormittag",
+    "scheduleAfternoon": "Nachmittag",
+    "scheduleEvening": "Abend",
+    "scheduleFlexible": "Flexibel",
+    "heardFrom": "Wie hast du von uns erfahren?",
+    "heardFromPlaceholder": "Option wählen",
+    "heardInstagram": "Instagram",
+    "heardFacebook": "Facebook",
+    "heardTiktok": "TikTok",
+    "heardFriend": "Freund/Familie",
+    "heardGoogle": "Google",
+    "heardOther": "Andere",
+    "emergencyContactName": "Name des Notfallkontakts",
+    "emergencyContactPhone": "Telefon des Notfallkontakts",
+    "healthNotes": "Gesundheitshinweise / Verletzungen",
+    "healthNotesPlaceholder": "z.B. Allergien, frühere Verletzungen, gesundheitliche Beschwerden...",
+    "message": "Nachricht (optional)",
+    "submit": "Anmeldung Senden",
+    "sending": "Wird gesendet...",
+    "successTitle": "Danke!",
+    "successBody": "Deine Anmeldung wurde erfolgreich gesendet. Unser Team meldet sich in Kürze bei dir.",
+    "close": "Schließen",
+    "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+  },
+  "footer": {
+    "rights": "Alle Rechte vorbehalten.",
+    "quickLinks": "Schnelllinks",
+    "followUs": "Folgen Sie Uns",
+    "contactInfo": "Kontaktinformationen"
+  },
+  "language": {
+    "sq": "Albanisch",
+    "en": "Englisch",
+    "de": "Deutsch"
+  },
+  "admin": {
+    "loginTitle": "Admin-Bereich",
+    "loginSubtitle": "Melde dich an, um die Website zu verwalten",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "login": "Anmelden",
+    "loginError": "Ungültiger Benutzername oder Passwort",
+    "logout": "Abmelden",
+    "dashboard": "Dashboard",
+    "backToSite": "Website Ansehen"
+  }
+}
