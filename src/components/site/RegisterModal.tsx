@@ -1,19 +1,24 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
+import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import { X, Send, CheckCircle2, AlertCircle } from "lucide-react";
 
 export default function RegisterModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const t = useTranslations("register");
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
-    const original = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = original;
+      document.body.style.overflow = "";
     };
   }, [open]);
 
@@ -21,7 +26,7 @@ export default function RegisterModal({ open, onClose }: { open: boolean; onClos
     if (open) setStatus("idle");
   }, [open]);
 
-  if (!open) return null;
+  if (!open || !mounted) return null;
 
   const PROGRAMS = [
     { value: "kids", label: t("programKids") },
@@ -73,7 +78,7 @@ export default function RegisterModal({ open, onClose }: { open: boolean; onClos
     }
   }
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-[200] flex items-center justify-center bg-navy-950/70 p-4 backdrop-blur-sm" onClick={onClose}>
       <div
         className="relative max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-2xl bg-white p-7 shadow-2xl sm:p-8"
@@ -338,6 +343,7 @@ export default function RegisterModal({ open, onClose }: { open: boolean; onClos
           </>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
