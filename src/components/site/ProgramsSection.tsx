@@ -53,7 +53,13 @@ export default async function ProgramsSection() {
         {/* Kids highlight */}
         <div className="mt-20 grid grid-cols-1 items-center gap-12 overflow-hidden rounded-3xl bg-navy-950 shadow-xl lg:grid-cols-2">
           <div className="relative h-72 lg:h-full">
-            <Image src="/images/kids-training.jpg" alt="Kids Wing Tsun training" fill className="object-cover" />
+            <Image
+              src="/images/kids-training.jpg"
+              alt="Kids Wing Tsun training"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent lg:bg-gradient-to-r" />
           </div>
           <div className="px-8 py-12 lg:pr-14">

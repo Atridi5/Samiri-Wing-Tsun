@@ -52,6 +52,7 @@
     "subtitle": "Fülle deine Daten aus und unser Team kontaktiert dich bezüglich Zeitplan und Einstieg.",
     "name": "Name",
     "phone": "Telefon",
+    "phoneHint": "Nummer im Format 044/045/049 xxx xxx oder +383 4X xxx xxx eingeben",
     "email": "E-Mail (optional)",
     "program": "Programm",
     "programPlaceholder": "Programm wählen",

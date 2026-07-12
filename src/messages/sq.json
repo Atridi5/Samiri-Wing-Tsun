@@ -52,6 +52,7 @@
     "subtitle": "Plotëso të dhënat dhe stafi ynë do të të kontaktojë për orarin dhe fillimin e stërvitjes.",
     "name": "Emri",
     "phone": "Telefoni",
+    "phoneHint": "Shkruaj numrin në format 044/045/049 xxx xxx ose +383 4X xxx xxx",
     "email": "Email (opsionale)",
     "program": "Programi",
     "programPlaceholder": "Zgjidh programin",

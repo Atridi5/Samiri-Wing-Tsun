@@ -52,6 +52,7 @@
     "subtitle": "Fill in your details and our team will contact you about schedules and getting started.",
     "name": "Name",
     "phone": "Phone",
+    "phoneHint": "Enter number as 044/045/049 xxx xxx or +383 4X xxx xxx",
     "email": "Email (optional)",
     "program": "Program",
     "programPlaceholder": "Choose a program",

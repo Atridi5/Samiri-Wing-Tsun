@@ -62,6 +62,7 @@ export default function ContactForm() {
           name="phone"
           type="tel"
           maxLength={50}
+          pattern="^(\+?383|0)4[4-9][0-9]{6}$"
           className="w-full rounded-lg border border-navy-900/15 bg-white px-4 py-3 text-sm text-navy-900 outline-none transition-colors focus:border-gold-500"
         />
       </div>

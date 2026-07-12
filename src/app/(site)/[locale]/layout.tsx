@@ -6,6 +6,8 @@ import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import Navbar from "@/components/site/Navbar";
 import Footer from "@/components/site/Footer";
+import WhatsAppFloat from "@/components/site/WhatsAppFloat";
+import { getContactInfo } from "@/lib/content";
 import "../../globals.css";
 
 const oswald = Oswald({
@@ -19,11 +21,45 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Samir Wing Tsun System | Ferizaj",
-  description:
-    "Samir Wing Tsun System — trajnime autentike Wing Tsun në Ferizaj për fëmijë, të rinj dhe të rritur. Sifu Samir Ibishi.",
+const DESCRIPTIONS: Record<string, string> = {
+  sq: "Samir Wing Tsun System — trajnime autentike Wing Tsun në Ferizaj për fëmijë, të rinj dhe të rritur. Sifu Samir Ibishi.",
+  en: "Samir Wing Tsun System — authentic Wing Tsun training in Ferizaj for kids, teens and adults. Led by Sifu Samir Ibishi.",
+  de: "Samir Wing Tsun System — authentisches Wing-Tsun-Training in Ferizaj für Kinder, Jugendliche und Erwachsene. Geleitet von Sifu Samir Ibishi.",
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const description = DESCRIPTIONS[locale] ?? DESCRIPTIONS.sq;
+  const title = "Samir Wing Tsun System | Ferizaj";
+
+  return {
+    metadataBase: new URL(process.env.SITE_URL ?? "http://localhost:3000"),
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}`,
+      languages: { sq: "/sq", en: "/en", de: "/de" },
+    },
+    openGraph: {
+      title,
+      description,
+      locale,
+      type: "website",
+      siteName: "Samir Wing Tsun System",
+      images: [{ url: "/images/hero-training.jpg", width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/images/hero-training.jpg"],
+    },
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -41,6 +77,7 @@ export default async function LocaleLayout({
     notFound();
   }
   setRequestLocale(locale);
+  const contact = await getContactInfo();
 
   return (
     <html lang={locale} className={`${oswald.variable} ${inter.variable} h-full scroll-smooth`}>
@@ -49,6 +86,7 @@ export default async function LocaleLayout({
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
+          <WhatsAppFloat phone={contact?.phone ?? ""} />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -135,6 +135,8 @@ export default function RegisterModal({ open, onClose }: { open: boolean; onClos
                       type="tel"
                       required
                       maxLength={50}
+                      pattern="^(\+?383|0)4[4-9][0-9]{6}$"
+                      title={t("phoneHint")}
                       className="w-full rounded-lg border border-navy-900/15 px-4 py-2.5 text-sm text-navy-900 outline-none focus:border-gold-500"
                     />
                   </div>
