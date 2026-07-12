@@ -97,6 +97,14 @@ export default function RegistrationsPage() {
   }
 
   async function saveReply(id: string, adminReply: string, email: string | null) {
+    if (email && adminReply.trim()) {
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+        email
+      )}&su=${encodeURIComponent("Përgjigje - Samir Wing Tsun System")}&body=${encodeURIComponent(
+        adminReply
+      )}`;
+      window.open(gmailUrl, "_blank", "noopener,noreferrer");
+    }
     setSavingReplyId(id);
     await fetch(`/api/admin/registrations/${id}`, {
       method: "PATCH",
@@ -104,11 +112,6 @@ export default function RegistrationsPage() {
       body: JSON.stringify({ adminReply }),
     });
     setSavingReplyId(null);
-    if (email && adminReply.trim()) {
-      window.location.href = `mailto:${email}?subject=${encodeURIComponent(
-        "Përgjigje - Samir Wing Tsun System"
-      )}&body=${encodeURIComponent(adminReply)}`;
-    }
   }
 
   async function handleDelete(id: string) {
