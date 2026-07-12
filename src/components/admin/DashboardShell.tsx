@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -21,7 +21,33 @@ import {
   Menu,
   X,
   ExternalLink,
+  Bell,
 } from "lucide-react";
+
+const REGISTRATIONS_POLL_MS = 15000;
+
+function playNotificationBeep() {
+  try {
+    const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    const ctx = new AudioCtx();
+    const now = ctx.currentTime;
+    [880, 1175].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0, now + i * 0.15);
+      gain.gain.linearRampToValueAtTime(0.15, now + i * 0.15 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.15 + 0.25);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + i * 0.15);
+      osc.stop(now + i * 0.15 + 0.3);
+    });
+  } catch {
+    // Audio not available; ignore.
+  }
+}
 
 const NAV = [
   { href: "/admin", label: "Përmbledhje", icon: LayoutDashboard },
@@ -48,6 +74,53 @@ export default function DashboardShell({
   const pathname = usePathname();
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [newCount, setNewCount] = useState(0);
+  const [toast, setToast] = useState<string | null>(null);
+  const knownIdsRef = useRef<Set<string> | null>(null);
+  const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function poll() {
+      try {
+        const res = await fetch("/api/admin/registrations");
+        if (!res.ok) return;
+        const data: { id: string; status: string }[] = await res.json();
+        if (cancelled) return;
+
+        const currentNew = data.filter((r) => r.status === "new");
+        const currentIds = new Set(currentNew.map((r) => r.id));
+
+        if (knownIdsRef.current) {
+          const arrivedCount = [...currentIds].filter((id) => !knownIdsRef.current!.has(id)).length;
+          if (arrivedCount > 0) {
+            playNotificationBeep();
+            setToast(
+              arrivedCount === 1
+                ? "Ka arritur 1 regjistrim i ri!"
+                : `Kanë arritur ${arrivedCount} regjistrime të reja!`
+            );
+            if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
+            toastTimeoutRef.current = setTimeout(() => setToast(null), 6000);
+          }
+        }
+
+        knownIdsRef.current = currentIds;
+        setNewCount(currentIds.size);
+      } catch {
+        // Network hiccup; try again on next poll.
+      }
+    }
+
+    poll();
+    const interval = setInterval(poll, REGISTRATIONS_POLL_MS);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+      if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
+    };
+  }, []);
 
   async function handleLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
@@ -79,6 +152,11 @@ export default function DashboardShell({
             >
               <item.icon className="h-[18px] w-[18px]" />
               {item.label}
+              {item.href === "/admin/registrations" && newCount > 0 && (
+                <span className="ml-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1.5 text-[11px] font-bold text-white">
+                  {newCount}
+                </span>
+              )}
             </Link>
           );
         })}
@@ -140,6 +218,19 @@ export default function DashboardShell({
         </header>
         <main className="flex-1 bg-slate-100 p-6 lg:p-10">{children}</main>
       </div>
+
+      {toast && (
+        <Link
+          href="/admin/registrations"
+          onClick={() => setToast(null)}
+          className="fixed bottom-6 right-6 z-[300] flex items-center gap-3 rounded-2xl bg-[#0b1530] px-5 py-4 text-sm font-medium text-white shadow-2xl ring-1 ring-white/10 transition-transform hover:scale-[1.02]"
+        >
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#d4af37]/20 text-[#d4af37]">
+            <Bell className="h-4.5 w-4.5" />
+          </span>
+          {toast}
+        </Link>
+      )}
     </div>
   );
 }
