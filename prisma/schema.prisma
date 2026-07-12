@@ -138,6 +138,25 @@ model Registration {
   createdAt            DateTime @default(now())
 }
 
+model Student {
+  id                   String    @id @default(cuid())
+  registrationId       String?   @unique
+  name                 String
+  phone                String
+  email                String?
+  age                  Int?
+  address              String?
+  program              String
+  status               String    @default("active")
+  emergencyContactName String?
+  emergencyContactPhone String?
+  healthNotes          String?
+  notes                String?
+  joinedAt             DateTime  @default(now())
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+}
+
 model ContactInfo {
   id          String  @id @default(cuid())
   address     String

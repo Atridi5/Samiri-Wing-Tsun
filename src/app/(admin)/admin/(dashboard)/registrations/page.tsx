@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Trash2, Loader2, Phone, Mail, Check, X, Send } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Trash2, Loader2, Phone, Mail, Check, X, Send, Search } from "lucide-react";
 
 type Registration = {
   id: string;
@@ -73,6 +73,8 @@ export default function RegistrationsPage() {
   const [items, setItems] = useState<Registration[]>([]);
   const [loading, setLoading] = useState(true);
   const [savingReplyId, setSavingReplyId] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<"all" | Registration["status"]>("all");
 
   useEffect(() => {
     fetch("/api/admin/registrations")
@@ -120,6 +122,24 @@ export default function RegistrationsPage() {
     setItems((prev) => prev.filter((r) => r.id !== id));
   }
 
+  const counts = {
+    new: items.filter((r) => r.status === "new").length,
+    contacted: items.filter((r) => r.status === "contacted").length,
+    accepted: items.filter((r) => r.status === "accepted").length,
+    enrolled: items.filter((r) => r.status === "enrolled").length,
+  };
+
+  const filtered = useMemo(() => {
+    return items.filter((r) => {
+      if (statusFilter !== "all" && r.status !== statusFilter) return false;
+      if (search.trim()) {
+        const q = search.trim().toLowerCase();
+        return r.name.toLowerCase().includes(q) || r.phone.includes(q) || (r.email ?? "").toLowerCase().includes(q);
+      }
+      return true;
+    });
+  }, [items, search, statusFilter]);
+
   if (loading) {
     return (
       <div className="flex items-center gap-2 text-slate-500">
@@ -135,8 +155,53 @@ export default function RegistrationsPage() {
         Klientët që janë regjistruar nga faqja kryesore përmes butonit &quot;Regjistrohu&quot;.
       </p>
 
-      <div className="mt-8 space-y-3">
-        {items.map((reg) => (
+      <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <div className="rounded-2xl bg-white p-4 text-center shadow-sm ring-1 ring-slate-200">
+          <p className="text-2xl font-bold text-[#8a6d1c]">{counts.new}</p>
+          <p className="text-xs uppercase tracking-wide text-slate-500">Të Reja</p>
+        </div>
+        <div className="rounded-2xl bg-white p-4 text-center shadow-sm ring-1 ring-slate-200">
+          <p className="text-2xl font-bold text-blue-600">{counts.contacted}</p>
+          <p className="text-xs uppercase tracking-wide text-slate-500">Kontaktuar</p>
+        </div>
+        <div className="rounded-2xl bg-white p-4 text-center shadow-sm ring-1 ring-slate-200">
+          <p className="text-2xl font-bold text-emerald-600">{counts.accepted}</p>
+          <p className="text-xs uppercase tracking-wide text-slate-500">Pranuar</p>
+        </div>
+        <div className="rounded-2xl bg-white p-4 text-center shadow-sm ring-1 ring-slate-200">
+          <p className="text-2xl font-bold text-navy-900">{counts.enrolled}</p>
+          <p className="text-xs uppercase tracking-wide text-slate-500">Studentë</p>
+        </div>
+      </div>
+
+      <div className="mt-6 flex flex-wrap items-center gap-3">
+        <div className="relative flex-1 min-w-[220px]">
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Kërko sipas emrit, telefonit, email..."
+            className="w-full rounded-full border border-slate-200 bg-white py-2.5 pl-9 pr-4 text-sm outline-none focus:border-[#d4af37]"
+          />
+        </div>
+        <div className="flex flex-wrap gap-1 rounded-full bg-slate-200/70 p-1">
+          {(["all", ...STATUS_OPTIONS.map((o) => o.value)] as const).map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => setStatusFilter(s)}
+              className={`rounded-full px-3.5 py-2 text-xs font-medium transition-colors ${
+                statusFilter === s ? "bg-white text-slate-900 shadow-sm" : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              {s === "all" ? "Të gjithë" : STATUS_OPTIONS.find((o) => o.value === s)?.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-6 space-y-3">
+        {filtered.map((reg) => (
           <div key={reg.id} className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
@@ -272,9 +337,9 @@ export default function RegistrationsPage() {
           </div>
         ))}
 
-        {items.length === 0 && (
+        {filtered.length === 0 && (
           <p className="rounded-2xl bg-white p-6 text-sm text-slate-500 ring-1 ring-slate-200">
-            Ende nuk ka regjistrime.
+            {items.length === 0 ? "Ende nuk ka regjistrime." : "Asnjë regjistrim nuk përputhet me kërkimin/filtrin."}
           </p>
         )}
       </div>

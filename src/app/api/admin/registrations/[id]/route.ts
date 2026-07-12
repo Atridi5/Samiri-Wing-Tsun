@@ -15,6 +15,27 @@ export async function PATCH(request: NextRequest, context: { params: Promise<{ i
     return NextResponse.json({ error: "invalid_input" }, { status: 400 });
   }
   const updated = await prisma.registration.update({ where: { id }, data: parsed.data });
+
+  if (parsed.data.status === "enrolled") {
+    const existing = await prisma.student.findUnique({ where: { registrationId: id } });
+    if (!existing) {
+      await prisma.student.create({
+        data: {
+          registrationId: id,
+          name: updated.name,
+          phone: updated.phone,
+          email: updated.email,
+          age: updated.age,
+          address: updated.address,
+          program: updated.program,
+          emergencyContactName: updated.emergencyContactName,
+          emergencyContactPhone: updated.emergencyContactPhone,
+          healthNotes: updated.healthNotes,
+        },
+      });
+    }
+  }
+
   return NextResponse.json(updated);
 }
 
