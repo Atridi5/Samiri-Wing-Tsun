@@ -285,6 +285,103 @@ async function main() {
     await seedBenefitGroup("why", ["shield-check", "wind", "brain-circuit", "users"], whyTrain);
   }
 
+  // ---------- FAQ (chatbot) ----------
+  const faqData: { t: Record<Locale, { question: string; answer: string }> }[] = [
+    {
+      t: {
+        sq: {
+          question: "Sa kushton abonimi mujor?",
+          answer: "Çmimet ndryshojnë sipas programit (Kids, Të Rinj, Të Rritur). Na kontakto në telefon ose WhatsApp për çmimin aktual dhe ofertat.",
+        },
+        en: {
+          question: "How much does the monthly membership cost?",
+          answer: "Prices vary by program (Kids, Teens, Adults). Contact us by phone or WhatsApp for current pricing and offers.",
+        },
+        de: {
+          question: "Was kostet die monatliche Mitgliedschaft?",
+          answer: "Die Preise variieren je nach Programm (Kids, Jugendliche, Erwachsene). Kontaktiere uns per Telefon oder WhatsApp für aktuelle Preise und Angebote.",
+        },
+      },
+    },
+    {
+      t: {
+        sq: {
+          question: "A ka orë provë falas?",
+          answer: "Po! Regjistrohu përmes butonit 'Regjistrohu' dhe zgjidh 'Orë Provë' si program — stafi ynë do të të kontaktojë për ta caktuar.",
+        },
+        en: {
+          question: "Is there a free trial class?",
+          answer: "Yes! Sign up using the 'Join Now' button and select 'Trial Class' as the program — our team will contact you to schedule it.",
+        },
+        de: {
+          question: "Gibt es eine kostenlose Probestunde?",
+          answer: "Ja! Melde dich über den Button 'Jetzt Anmelden' an und wähle 'Probestunde' als Programm — unser Team meldet sich, um sie zu vereinbaren.",
+        },
+      },
+    },
+    {
+      t: {
+        sq: {
+          question: "Nga cila moshë mund të fillojnë fëmijët?",
+          answer: "Programi për fëmijë pranon fëmijë që nga mosha 6 vjeç e lart, në grupe të përshtatura sipas moshës.",
+        },
+        en: {
+          question: "From what age can kids start?",
+          answer: "The Kids program accepts children from age 6 and up, in age-appropriate groups.",
+        },
+        de: {
+          question: "Ab welchem Alter können Kinder beginnen?",
+          answer: "Das Kids-Programm nimmt Kinder ab 6 Jahren auf, in altersgerechten Gruppen.",
+        },
+      },
+    },
+    {
+      t: {
+        sq: {
+          question: "Ku ndodheni?",
+          answer: "Ndodhemi në Rr. Sinan Sahiti 79, Ferizaj. Shiko seksionin 'Lokacioni' në faqe për hartën dhe udhëzimet.",
+        },
+        en: {
+          question: "Where are you located?",
+          answer: "We're located at Rr. Sinan Sahiti 79, Ferizaj. Check the 'Location' section on the page for the map and directions.",
+        },
+        de: {
+          question: "Wo befindet ihr euch?",
+          answer: "Wir befinden uns in der Rr. Sinan Sahiti 79, Ferizaj. Siehe den Abschnitt 'Standort' auf der Seite für Karte und Wegbeschreibung.",
+        },
+      },
+    },
+    {
+      t: {
+        sq: {
+          question: "A duhet përvojë paraprake për t'u regjistruar?",
+          answer: "Jo, Wing Tsun System pranon çdo nivel — nga fillestarët deri te praktikuesit me përvojë. Programi përshtatet për ty.",
+        },
+        en: {
+          question: "Do I need prior experience to join?",
+          answer: "No, Wing Tsun System welcomes every level — from complete beginners to experienced practitioners. The program adapts to you.",
+        },
+        de: {
+          question: "Brauche ich Vorerfahrung, um mitzumachen?",
+          answer: "Nein, Wing Tsun System heißt jedes Niveau willkommen — von absoluten Anfängern bis zu erfahrenen Praktizierenden. Das Programm passt sich dir an.",
+        },
+      },
+    },
+  ];
+
+  const faqCount = await prisma.faqItem.count();
+  if (faqCount === 0) {
+    for (let i = 0; i < faqData.length; i++) {
+      const item = await prisma.faqItem.create({ data: { order: i } });
+      for (const locale of Object.keys(faqData[i].t) as Locale[]) {
+        const { question, answer } = faqData[i].t[locale];
+        await prisma.faqTranslation.create({
+          data: { faqId: item.id, locale, question, answer },
+        });
+      }
+    }
+  }
+
   // ---------- Contact info ----------
   await prisma.contactInfo.upsert({
     where: { id: "main" },

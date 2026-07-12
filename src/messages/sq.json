@@ -1,4 +1,13 @@
 {
+  "chat": {
+    "title": "Asistenti Ynë",
+    "subtitle": "Pyet për kurset dhe programet",
+    "greeting": "Përshëndetje! Pyetmë çka të duash rreth kurseve, orareve apo çmimeve.",
+    "fallback": "Nuk kam gjetur përgjigje të saktë për këtë. Na kontakto direkt në WhatsApp ose plotëso formularin e regjistrimit dhe stafi ynë do të të përgjigjet.",
+    "placeholder": "Shkruaj pyetjen tënde...",
+    "openLabel": "Hap asistentin e chat-it",
+    "sendLabel": "Dërgo"
+  },
   "nav": {
     "home": "Ballina",
     "about": "Rreth Nesh",

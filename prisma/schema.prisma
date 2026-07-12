@@ -129,3 +129,20 @@ model ContactInfo {
   tiktok      String?
   mapEmbedUrl String?
 }
+
+model FaqItem {
+  id           String            @id @default(cuid())
+  order        Int               @default(0)
+  translations FaqTranslation[]
+}
+
+model FaqTranslation {
+  id        String  @id @default(cuid())
+  faqId     String
+  faq       FaqItem @relation(fields: [faqId], references: [id], onDelete: Cascade)
+  locale    String
+  question  String
+  answer    String
+
+  @@unique([faqId, locale])
+}

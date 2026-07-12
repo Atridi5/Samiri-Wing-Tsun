@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { Oswald, Inter } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
-import { setRequestLocale } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import Navbar from "@/components/site/Navbar";
 import Footer from "@/components/site/Footer";
 import WhatsAppFloat from "@/components/site/WhatsAppFloat";
+import ChatAssistant from "@/components/site/ChatAssistant";
 import { getContactInfo } from "@/lib/content";
 import "../../globals.css";
 
@@ -77,16 +78,17 @@ export default async function LocaleLayout({
     notFound();
   }
   setRequestLocale(locale);
-  const contact = await getContactInfo();
+  const [contact, messages] = await Promise.all([getContactInfo(), getMessages()]);
 
   return (
     <html lang={locale} className={`${oswald.variable} ${inter.variable} h-full scroll-smooth`}>
       <body className="min-h-full flex flex-col bg-cream-100 font-sans antialiased">
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
           <WhatsAppFloat phone={contact?.phone ?? ""} />
+          <ChatAssistant />
         </NextIntlClientProvider>
       </body>
     </html>
