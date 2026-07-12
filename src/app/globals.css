@@ -61,3 +61,50 @@ body {
   background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.04) 1px, transparent 0);
   background-size: 3px 3px;
 }
+
+@keyframes float-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -40px) scale(1.08); }
+}
+
+@keyframes float-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-25px, 35px) scale(1.05); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-slow-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes particle-rise {
+  0% { transform: translateY(0); opacity: 0; }
+  15% { opacity: 0.6; }
+  85% { opacity: 0.6; }
+  100% { transform: translateY(-120px); opacity: 0; }
+}
+
+.animate-float-drift-1 {
+  animation: float-drift-1 14s ease-in-out infinite;
+}
+
+.animate-float-drift-2 {
+  animation: float-drift-2 18s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 60s linear infinite;
+}
+
+.animate-spin-slow-reverse {
+  animation: spin-slow-reverse 80s linear infinite;
+}
+
+.animate-particle-rise {
+  animation: particle-rise linear infinite;
+}

@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { getSiteText, getGallery, type Locale } from "@/lib/content";
 import GalleryGrid from "@/components/site/GalleryGrid";
+import AboutHeroBackground from "@/components/site/AboutHeroBackground";
 
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -32,6 +33,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-navy-950/80 via-navy-950/70 to-navy-950" />
+        <AboutHeroBackground />
         <div className="relative mx-auto max-w-4xl px-6 py-24 text-center">
           <p className="section-eyebrow text-xs font-semibold uppercase text-gold-400">{t("sectionLabel")}</p>
           <h1 className="mt-3 font-display text-3xl font-bold uppercase leading-tight text-cream-50 sm:text-5xl">
