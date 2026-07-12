@@ -24,28 +24,49 @@ function normalize(text: string) {
     .join("");
 }
 
+const STOPWORDS = new Set([
+  "the", "and", "for", "are", "you", "what", "how", "with", "from", "that", "this",
+  "sepse", "edhe", "dhe", "për", "nga", "kjo", "kur", "cka", "çka", "qka", "aty", "ktu",
+  "kush", "sic", "sikur", "sic", "eshte", "është", "jane", "janë", "ndonje",
+]);
+
+function wordsOf(text: string): string[] {
+  return normalize(text)
+    .split(/[^a-z0-9]+/)
+    .filter((w) => w.length > 2 && !STOPWORDS.has(w));
+}
+
+const MIN_STEM_LENGTH = 4;
+
+function wordsMatch(a: string, b: string): boolean {
+  if (a === b) return true;
+  if (a.length < MIN_STEM_LENGTH || b.length < MIN_STEM_LENGTH) return false;
+  const shorter = a.length < b.length ? a : b;
+  const longer = a.length < b.length ? b : a;
+  return longer.startsWith(shorter) && shorter.length >= MIN_STEM_LENGTH;
+}
+
 function findBestMatch(query: string, faqs: Faq[]): Faq | null {
-  const q = normalize(query);
-  const queryWords = q.split(/\s+/).filter((w) => w.length > 2);
+  const queryWords = wordsOf(query);
   if (queryWords.length === 0) return null;
 
   let best: Faq | null = null;
   let bestScore = 0;
 
   for (const faq of faqs) {
-    const haystack = normalize(`${faq.question} ${faq.answer}`);
+    const haystackWords = wordsOf(`${faq.question} ${faq.answer}`);
     let score = 0;
     for (const word of queryWords) {
-      if (haystack.includes(word)) score += 1;
+      if (haystackWords.some((hw) => wordsMatch(word, hw))) score += 1;
     }
-    if (normalize(faq.question).includes(q)) score += 3;
     if (score > bestScore) {
       bestScore = score;
       best = faq;
     }
   }
 
-  return bestScore > 0 ? best : null;
+  const minScore = queryWords.length >= 3 ? 2 : 1;
+  return bestScore >= minScore ? best : null;
 }
 
 export default function ChatAssistant() {

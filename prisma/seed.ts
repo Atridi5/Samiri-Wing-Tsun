@@ -447,6 +447,22 @@ async function main() {
         },
       },
     },
+    {
+      t: {
+        sq: {
+          question: "Kush është trajneri/instruktori?",
+          answer: "Sifu Samir Ibishi është themeluesi dhe instruktori kryesor i Samir Wing Tsun System në Ferizaj, me përvojë e certifikime në artin e Wing Tsun.",
+        },
+        en: {
+          question: "Who is the trainer/instructor?",
+          answer: "Sifu Samir Ibishi is the founder and head instructor of Samir Wing Tsun System in Ferizaj, with years of experience and certification in the art of Wing Tsun.",
+        },
+        de: {
+          question: "Wer ist der Trainer/Ausbilder?",
+          answer: "Sifu Samir Ibishi ist der Gründer und Chefausbilder von Samir Wing Tsun System in Ferizaj, mit langjähriger Erfahrung und Zertifizierung in der Kunst des Wing Tsun.",
+        },
+      },
+    },
   ];
 
   const faqCount = await prisma.faqItem.count();
