@@ -3,7 +3,7 @@
     "title": "Unser Assistent",
     "subtitle": "Frag nach Kursen und Programmen",
     "greeting": "Hallo! Frag mich alles über unsere Kurse, Zeitpläne oder Preise.",
-    "fallback": "Dazu habe ich keine genaue Antwort gefunden. Kontaktiere uns direkt auf WhatsApp oder fülle das Anmeldeformular aus, und unser Team meldet sich bei dir.",
+    "fallback": "Da bin ich mir nicht sicher, aber hier sind einige unserer häufigsten Fragen — vielleicht findest du deine Antwort darunter. Ansonsten schreib uns direkt auf WhatsApp.",
     "placeholder": "Schreib deine Frage...",
     "openLabel": "Chat-Assistenten öffnen",
     "sendLabel": "Senden"

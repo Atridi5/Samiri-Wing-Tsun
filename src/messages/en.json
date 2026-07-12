@@ -3,7 +3,7 @@
     "title": "Our Assistant",
     "subtitle": "Ask about courses and programs",
     "greeting": "Hi! Ask me anything about our courses, schedules or pricing.",
-    "fallback": "I couldn't find an exact answer for that. Please contact us on WhatsApp or fill in the registration form and our team will get back to you.",
+    "fallback": "I'm not sure about that one, but here are some of our most frequently asked questions — you might find your answer below. Otherwise, message us directly on WhatsApp.",
     "placeholder": "Type your question...",
     "openLabel": "Open chat assistant",
     "sendLabel": "Send"

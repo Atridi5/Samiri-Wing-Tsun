@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { MessageCircle, X, Send, Bot } from "lucide-react";
 
 type Faq = { id: string; question: string; answer: string };
-type ChatMessage = { role: "user" | "bot"; text: string };
+type ChatMessage = { role: "user" | "bot"; text: string; suggestions?: Faq[] };
 
 const DIACRITICS: Record<string, string> = {
   ë: "e",
@@ -80,10 +80,16 @@ export default function ChatAssistant() {
     setInput("");
 
     const match = findBestMatch(text, faqs);
-    const reply = match ? match.answer : t("fallback");
 
     setTimeout(() => {
-      setMessages((prev) => [...prev, { role: "bot", text: reply }]);
+      if (match) {
+        setMessages((prev) => [...prev, { role: "bot", text: match.answer }]);
+      } else {
+        setMessages((prev) => [
+          ...prev,
+          { role: "bot", text: t("fallback"), suggestions: faqs.slice(0, 6) },
+        ]);
+      }
     }, 350);
   }
 
@@ -112,22 +118,39 @@ export default function ChatAssistant() {
 
           <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto bg-slate-50 px-4 py-4">
             {messages.map((m, i) => (
-              <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
-                <p
-                  className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-3.5 py-2 text-sm ${
-                    m.role === "user"
-                      ? "rounded-br-sm bg-navy-900 text-cream-50"
-                      : "rounded-bl-sm bg-white text-slate-700 shadow-sm ring-1 ring-slate-100"
-                  }`}
-                >
-                  {m.text}
-                </p>
+              <div key={i}>
+                <div className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+                  <p
+                    className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-3.5 py-2 text-sm ${
+                      m.role === "user"
+                        ? "rounded-br-sm bg-navy-900 text-cream-50"
+                        : "rounded-bl-sm bg-white text-slate-700 shadow-sm ring-1 ring-slate-100"
+                    }`}
+                  >
+                    {m.text}
+                  </p>
+                </div>
+
+                {m.suggestions && m.suggestions.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {m.suggestions.map((f) => (
+                      <button
+                        key={f.id}
+                        type="button"
+                        onClick={() => sendMessage(f.question)}
+                        className="rounded-full border border-navy-900/15 bg-white px-3 py-1.5 text-xs font-medium text-navy-800 transition-colors hover:border-gold-500 hover:text-gold-600"
+                      >
+                        {f.question}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
 
             {messages.length <= 1 && faqs.length > 0 && (
               <div className="flex flex-wrap gap-2 pt-1">
-                {faqs.slice(0, 4).map((f) => (
+                {faqs.slice(0, 6).map((f) => (
                   <button
                     key={f.id}
                     type="button"

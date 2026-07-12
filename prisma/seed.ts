@@ -367,6 +367,86 @@ async function main() {
         },
       },
     },
+    {
+      t: {
+        sq: {
+          question: "Sa herë në javë zhvillohen stërvitjet?",
+          answer: "Stërvitjet zhvillohen disa herë në javë sipas orarit të programit — paradite, pasdite dhe mbrëmje. Na kontakto për orarin e plotë aktual.",
+        },
+        en: {
+          question: "How many times a week are the training sessions?",
+          answer: "Training sessions run several times a week depending on the program schedule — morning, afternoon and evening. Contact us for the current full schedule.",
+        },
+        de: {
+          question: "Wie oft pro Woche finden die Trainings statt?",
+          answer: "Die Trainings finden je nach Programm mehrmals pro Woche statt — vormittags, nachmittags und abends. Kontaktiere uns für den aktuellen vollständigen Zeitplan.",
+        },
+      },
+    },
+    {
+      t: {
+        sq: {
+          question: "Çfarë duhet të sjell në stërvitjen e parë?",
+          answer: "Mjafton veshje sportive e rehatshme dhe një shishe ujë. Pajisjet dhe uniforma sigurohen apo rekomandohen nga stafi ynë pas orës së parë.",
+        },
+        en: {
+          question: "What should I bring to my first training session?",
+          answer: "Just comfortable sportswear and a water bottle. Equipment and uniform are provided or recommended by our staff after your first class.",
+        },
+        de: {
+          question: "Was soll ich zum ersten Training mitbringen?",
+          answer: "Bequeme Sportkleidung und eine Wasserflasche genügen. Ausrüstung und Uniform werden von unserem Team nach der ersten Stunde bereitgestellt oder empfohlen.",
+        },
+      },
+    },
+    {
+      t: {
+        sq: {
+          question: "A ofroni stërvitje private (1-me-1)?",
+          answer: "Po, ofrojmë edhe orë private për ata që duan vëmendje më të fokusuar. Na kontakto në telefon ose WhatsApp për detaje dhe çmim.",
+        },
+        en: {
+          question: "Do you offer private (1-on-1) training?",
+          answer: "Yes, we also offer private sessions for those who want more focused attention. Contact us by phone or WhatsApp for details and pricing.",
+        },
+        de: {
+          question: "Bietet ihr Privattraining (1-zu-1) an?",
+          answer: "Ja, wir bieten auch Privatstunden für alle, die mehr individuelle Betreuung möchten. Kontaktiere uns per Telefon oder WhatsApp für Details und Preise.",
+        },
+      },
+    },
+    {
+      t: {
+        sq: {
+          question: "A merren certifikata apo gradë (Sash/Level)?",
+          answer: "Po, studentët përparojnë nëpër nivele/grada zyrtare të Wing Tsun System, bazuar në njohuri, kohë stërvitjeje dhe vlerësim nga Sifu Samir Ibishi.",
+        },
+        en: {
+          question: "Do students receive certificates or belt/level ranks?",
+          answer: "Yes, students progress through official Wing Tsun System levels/ranks, based on knowledge, training time and evaluation by Sifu Samir Ibishi.",
+        },
+        de: {
+          question: "Erhalten Schüler Zertifikate oder Gürtel/Levels?",
+          answer: "Ja, Schüler durchlaufen offizielle Wing Tsun System Levels/Grade, basierend auf Wissen, Trainingszeit und Bewertung durch Sifu Samir Ibishi.",
+        },
+      },
+    },
+    {
+      t: {
+        sq: {
+          question: "Si mund të anuloj ose pauzoj abonimin?",
+          answer: "Na kontakto direkt në telefon ose WhatsApp dhe stafi ynë do të të ndihmojë të pauzosh ose anulosh abonimin sipas politikave tona.",
+        },
+        en: {
+          question: "How can I cancel or pause my membership?",
+          answer: "Contact us directly by phone or WhatsApp and our staff will help you pause or cancel your membership according to our policies.",
+        },
+        de: {
+          question: "Wie kann ich meine Mitgliedschaft kündigen oder pausieren?",
+          answer: "Kontaktiere uns direkt per Telefon oder WhatsApp, und unser Team hilft dir, deine Mitgliedschaft gemäß unseren Richtlinien zu pausieren oder zu kündigen.",
+        },
+      },
+    },
   ];
 
   const faqCount = await prisma.faqItem.count();

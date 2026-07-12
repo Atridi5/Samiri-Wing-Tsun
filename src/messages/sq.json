@@ -3,7 +3,7 @@
     "title": "Asistenti Ynë",
     "subtitle": "Pyet për kurset dhe programet",
     "greeting": "Përshëndetje! Pyetmë çka të duash rreth kurseve, orareve apo çmimeve.",
-    "fallback": "Nuk kam gjetur përgjigje të saktë për këtë. Na kontakto direkt në WhatsApp ose plotëso formularin e regjistrimit dhe stafi ynë do të të përgjigjet.",
+    "fallback": "Nuk jam i sigurt për këtë, por ja disa nga pyetjet që na bëhen më shpesh — ndoshta gjen përgjigjen këtu. Përndryshe na shkruaj direkt në WhatsApp.",
     "placeholder": "Shkruaj pyetjen tënde...",
     "openLabel": "Hap asistentin e chat-it",
     "sendLabel": "Dërgo"
