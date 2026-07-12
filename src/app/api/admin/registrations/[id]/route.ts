@@ -3,7 +3,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 
 const schema = z.object({
-  status: z.enum(["new", "contacted", "accepted", "declined", "enrolled"]).optional(),
+  status: z.enum(["new", "contacted", "accepted", "declined"]).optional(),
   adminReply: z.string().trim().max(2000).optional(),
 });
 
@@ -16,7 +16,7 @@ export async function PATCH(request: NextRequest, context: { params: Promise<{ i
   }
   const updated = await prisma.registration.update({ where: { id }, data: parsed.data });
 
-  if (parsed.data.status === "enrolled") {
+  if (parsed.data.status === "accepted") {
     const existing = await prisma.student.findUnique({ where: { registrationId: id } });
     if (!existing) {
       await prisma.student.create({

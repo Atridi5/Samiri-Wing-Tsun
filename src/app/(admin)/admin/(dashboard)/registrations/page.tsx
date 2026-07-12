@@ -18,7 +18,7 @@ type Registration = {
   emergencyContactPhone: string | null;
   healthNotes: string | null;
   message: string | null;
-  status: "new" | "contacted" | "accepted" | "declined" | "enrolled";
+  status: "new" | "contacted" | "accepted" | "declined";
   adminReply: string | null;
   createdAt: string;
 };
@@ -56,9 +56,8 @@ const HEARD_FROM_LABEL: Record<string, string> = {
 const STATUS_OPTIONS: { value: Registration["status"]; label: string }[] = [
   { value: "new", label: "I Ri" },
   { value: "contacted", label: "I Kontaktuar" },
-  { value: "accepted", label: "I Pranuar" },
+  { value: "accepted", label: "I Pranuar (Student)" },
   { value: "declined", label: "I Anuluar" },
-  { value: "enrolled", label: "Student" },
 ];
 
 const STATUS_COLOR: Record<Registration["status"], string> = {
@@ -66,7 +65,6 @@ const STATUS_COLOR: Record<Registration["status"], string> = {
   contacted: "bg-blue-100 text-blue-700",
   accepted: "bg-emerald-100 text-emerald-700",
   declined: "bg-red-100 text-red-700",
-  enrolled: "bg-navy-900/10 text-navy-900",
 };
 
 export default function RegistrationsPage() {
@@ -126,7 +124,6 @@ export default function RegistrationsPage() {
     new: items.filter((r) => r.status === "new").length,
     contacted: items.filter((r) => r.status === "contacted").length,
     accepted: items.filter((r) => r.status === "accepted").length,
-    enrolled: items.filter((r) => r.status === "enrolled").length,
   };
 
   const filtered = useMemo(() => {
@@ -155,7 +152,7 @@ export default function RegistrationsPage() {
         Klientët që janë regjistruar nga faqja kryesore përmes butonit &quot;Regjistrohu&quot;.
       </p>
 
-      <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <div className="mt-6 grid grid-cols-3 gap-4">
         <div className="rounded-2xl bg-white p-4 text-center shadow-sm ring-1 ring-slate-200">
           <p className="text-2xl font-bold text-[#8a6d1c]">{counts.new}</p>
           <p className="text-xs uppercase tracking-wide text-slate-500">Të Reja</p>
@@ -166,11 +163,7 @@ export default function RegistrationsPage() {
         </div>
         <div className="rounded-2xl bg-white p-4 text-center shadow-sm ring-1 ring-slate-200">
           <p className="text-2xl font-bold text-emerald-600">{counts.accepted}</p>
-          <p className="text-xs uppercase tracking-wide text-slate-500">Pranuar</p>
-        </div>
-        <div className="rounded-2xl bg-white p-4 text-center shadow-sm ring-1 ring-slate-200">
-          <p className="text-2xl font-bold text-navy-900">{counts.enrolled}</p>
-          <p className="text-xs uppercase tracking-wide text-slate-500">Studentë</p>
+          <p className="text-xs uppercase tracking-wide text-slate-500">Pranuar (Studentë)</p>
         </div>
       </div>
 

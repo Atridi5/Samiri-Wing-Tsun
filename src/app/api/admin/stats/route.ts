@@ -12,7 +12,7 @@ export async function GET() {
       prisma.contactMessage.count({ where: { read: false } }),
       prisma.registration.count(),
       prisma.registration.count({ where: { status: "new" } }),
-      prisma.registration.count({ where: { status: "enrolled" } }),
+      prisma.student.count({ where: { status: "active" } }),
     ]);
   return NextResponse.json({
     programs,
