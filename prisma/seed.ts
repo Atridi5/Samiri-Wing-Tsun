@@ -495,6 +495,22 @@ async function main() {
         },
       },
     },
+    {
+      t: {
+        sq: {
+          question: "A pranohen vajzat/femrat?",
+          answer: "Vajzat pranohen vetëm në grupin e fëmijëve, deri në moshën 9 vjeçare. Për grupmoshat më të mëdha (Të Rinj dhe Të Rritur) aktualisht kemi vetëm grupe për djem/meshkuj.",
+        },
+        en: {
+          question: "Are girls/women accepted?",
+          answer: "Girls are accepted only in the Kids group, up to age 9. For the older age groups (Teens and Adults) we currently only have groups for boys/men.",
+        },
+        de: {
+          question: "Werden Mädchen/Frauen aufgenommen?",
+          answer: "Mädchen werden nur in der Kids-Gruppe aufgenommen, bis zum Alter von 9 Jahren. Für die älteren Altersgruppen (Jugendliche und Erwachsene) haben wir aktuell nur Gruppen für Jungen/Männer.",
+        },
+      },
+    },
   ];
 
   const faqCount = await prisma.faqItem.count();
@@ -551,19 +567,19 @@ async function main() {
           name: "Fëmijët (5-9 vjeç)",
           price: "30€",
           period: "/ muaj",
-          features: "Stërvitje: E Martë, E Enjte, E Shtunë — 19:00-20:00\nDita e parë falas\nUniformë obligative: 15€ (një herë)\nRrit koncentrimin dhe vetëbesimin\nZhvillon disiplinën dhe respektin",
+          features: "Stërvitje: E Martë, E Enjte, E Shtunë — 19:00-20:00\nDita e parë falas\nUniformë obligative: 15€ (një herë)\nRrit koncentrimin dhe vetëbesimin\nZhvillon disiplinën dhe respektin\nE hapur për djem dhe vajza (vajzat deri në moshën 9 vjeç)",
         },
         en: {
           name: "Kids (5-9 years)",
           price: "€30",
           period: "/ month",
-          features: "Training: Tue, Thu, Sat — 19:00-20:00\nFirst day free\nMandatory uniform: €15 (one-time)\nBuilds focus and self-confidence\nDevelops discipline and respect",
+          features: "Training: Tue, Thu, Sat — 19:00-20:00\nFirst day free\nMandatory uniform: €15 (one-time)\nBuilds focus and self-confidence\nDevelops discipline and respect\nOpen to boys and girls (girls up to age 9)",
         },
         de: {
           name: "Kids (5-9 Jahre)",
           price: "30€",
           period: "/ Monat",
-          features: "Training: Di, Do, Sa — 19:00-20:00\nErster Tag kostenlos\nObligatorische Uniform: 15€ (einmalig)\nStärkt Konzentration und Selbstvertrauen\nFördert Disziplin und Respekt",
+          features: "Training: Di, Do, Sa — 19:00-20:00\nErster Tag kostenlos\nObligatorische Uniform: 15€ (einmalig)\nStärkt Konzentration und Selbstvertrauen\nFördert Disziplin und Respekt\nOffen für Jungen und Mädchen (Mädchen bis 9 Jahre)",
         },
       },
     },
@@ -573,19 +589,19 @@ async function main() {
           name: "Të Rinjtë (10-17 vjeç)",
           price: "30€",
           period: "/ muaj",
-          features: "Stërvitje: E Martë, E Enjte, E Shtunë — 20:00-21:00\nDita e parë falas\nUniformë obligative: 15€ (një herë)\nFokus te vetëmbrojtja praktike\nZhvillim fizik dhe mendor",
+          features: "Stërvitje: E Martë, E Enjte, E Shtunë — 20:00-21:00\nDita e parë falas\nUniformë obligative: 15€ (një herë)\nFokus te vetëmbrojtja praktike\nZhvillim fizik dhe mendor\nAktualisht vetëm për djem",
         },
         en: {
           name: "Teens (10-17 years)",
           price: "€30",
           period: "/ month",
-          features: "Training: Tue, Thu, Sat — 20:00-21:00\nFirst day free\nMandatory uniform: €15 (one-time)\nFocus on practical self-defense\nPhysical and mental development",
+          features: "Training: Tue, Thu, Sat — 20:00-21:00\nFirst day free\nMandatory uniform: €15 (one-time)\nFocus on practical self-defense\nPhysical and mental development\nCurrently boys only",
         },
         de: {
           name: "Jugendliche (10-17 Jahre)",
           price: "30€",
           period: "/ Monat",
-          features: "Training: Di, Do, Sa — 20:00-21:00\nErster Tag kostenlos\nObligatorische Uniform: 15€ (einmalig)\nFokus auf praktische Selbstverteidigung\nKörperliche und geistige Entwicklung",
+          features: "Training: Di, Do, Sa — 20:00-21:00\nErster Tag kostenlos\nObligatorische Uniform: 15€ (einmalig)\nFokus auf praktische Selbstverteidigung\nKörperliche und geistige Entwicklung\nAktuell nur für Jungen",
         },
       },
     },
@@ -595,19 +611,19 @@ async function main() {
           name: "Të Rriturit (18+ vjeç)",
           price: "30€",
           period: "/ muaj",
-          features: "Stërvitje: E Martë, E Enjte, E Shtunë — 21:00-22:00\nDita e parë falas\nUniformë obligative: 15€ (një herë)\nTeknika reale vetëmbrojtjeje\nKondicion fizik dhe çlirim stresi",
+          features: "Stërvitje: E Martë, E Enjte, E Shtunë — 21:00-22:00\nDita e parë falas\nUniformë obligative: 15€ (një herë)\nTeknika reale vetëmbrojtjeje\nKondicion fizik dhe çlirim stresi\nAktualisht vetëm për meshkuj",
         },
         en: {
           name: "Adults (18+ years)",
           price: "€30",
           period: "/ month",
-          features: "Training: Tue, Thu, Sat — 21:00-22:00\nFirst day free\nMandatory uniform: €15 (one-time)\nReal self-defense techniques\nFitness and stress relief",
+          features: "Training: Tue, Thu, Sat — 21:00-22:00\nFirst day free\nMandatory uniform: €15 (one-time)\nReal self-defense techniques\nFitness and stress relief\nCurrently male only",
         },
         de: {
           name: "Erwachsene (18+ Jahre)",
           price: "30€",
           period: "/ Monat",
-          features: "Training: Di, Do, Sa — 21:00-22:00\nErster Tag kostenlos\nObligatorische Uniform: 15€ (einmalig)\nReale Selbstverteidigungstechniken\nFitness und Stressabbau",
+          features: "Training: Di, Do, Sa — 21:00-22:00\nErster Tag kostenlos\nObligatorische Uniform: 15€ (einmalig)\nReale Selbstverteidigungstechniken\nFitness und Stressabbau\nAktuell nur für Männer",
         },
       },
     },
