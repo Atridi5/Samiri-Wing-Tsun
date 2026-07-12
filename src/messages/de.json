@@ -11,11 +11,29 @@
   "nav": {
     "home": "Startseite",
     "about": "Über Uns",
+    "pricing": "Preise",
     "programs": "Programme",
     "gallery": "Galerie",
     "location": "Standort",
     "contact": "Kontakt",
     "cta": "Jetzt Anmelden"
+  },
+  "pricing": {
+    "sectionLabel": "Preise",
+    "title": "Pakete und Preise",
+    "subtitle": "Wähle das passende Paket und starte noch heute mit dem Training.",
+    "cta": "Jetzt Anmelden",
+    "empty": "Preise werden bald hinzugefügt. Kontaktiere uns direkt für Details."
+  },
+  "aboutPage": {
+    "sectionLabel": "Über Uns",
+    "fallbackTitle": "Samir Wing Tsun System",
+    "fallbackBody": "Samir Wing Tsun System ist eine Wing-Tsun-Selbstverteidigungsschule in Ferizaj, gegründet und geleitet von Sifu Samir Ibishi. Wir bieten Training für Kinder, Jugendliche und Erwachsene in einer professionellen und motivierenden Umgebung.",
+    "videoLabel": "Video",
+    "hallLabel": "Unsere Halle",
+    "hallTitle": "Trainingsumgebung",
+    "groupLabel": "Gruppen",
+    "groupTitle": "Unsere Schüler in Aktion"
   },
   "hero": {
     "ctaPrimary": "Jetzt Anmelden",

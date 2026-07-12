@@ -15,7 +15,9 @@ const LOCALES: { code: Locale; label: string; flag: string }[] = [
 
 const SECTIONS: { key: string; label: string; fields: (keyof TextValue)[] }[] = [
   { key: "hero", label: "Hero (Ballina)", fields: ["title", "subtitle", "body"] },
-  { key: "intro", label: "Rreth Nesh — Intro", fields: ["title", "body"] },
+  { key: "intro", label: "Rreth Nesh — Intro (Ballina)", fields: ["title", "body"] },
+  { key: "about_page", label: "Rreth Nesh — Faqja e Veçantë", fields: ["title", "body"] },
+  { key: "about_video", label: "Rreth Nesh — Video (URL embed, p.sh. YouTube)", fields: ["body"] },
   { key: "why", label: "Pse Wing Tsun", fields: ["title", "body"] },
   { key: "comparison", label: "Krahasimi: Pasiv vs Aktiv", fields: ["title", "subtitle"] },
   { key: "programs", label: "Programet — Titull", fields: ["title", "body"] },

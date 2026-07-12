@@ -501,15 +501,114 @@ async function main() {
   const galleryCount = await prisma.galleryImage.count();
   if (galleryCount === 0) {
     const images = [
-      { url: "/images/hero-training.jpg", caption: "Trajnim Wing Tsun" },
-      { url: "/images/hero-dark-dummy.jpg", caption: "Mok Yan Jong — Kukulla e drurit" },
-      { url: "/images/kids-training.jpg", caption: "Trajnim për fëmijë" },
-      { url: "/images/flyer-light.jpg", caption: "Samir Wing Tsun System, Ferizaj" },
+      { url: "/images/hero-training.jpg", caption: "Trajnim Wing Tsun", category: "hall" },
+      { url: "/images/hero-dark-dummy.jpg", caption: "Mok Yan Jong — Kukulla e drurit", category: "hall" },
+      { url: "/images/kids-training.jpg", caption: "Trajnim për fëmijë", category: "group" },
+      { url: "/images/flyer-light.jpg", caption: "Samir Wing Tsun System, Ferizaj", category: "general" },
     ];
     for (let i = 0; i < images.length; i++) {
       await prisma.galleryImage.create({ data: { ...images[i], order: i } });
     }
   }
+
+  // ---------- Pricing plans ----------
+  const pricingData: { t: Record<Locale, { name: string; price: string; period: string; features: string }> }[] = [
+    {
+      t: {
+        sq: {
+          name: "Kids",
+          price: "25€",
+          period: "/ muaj",
+          features: "2 orë stërvitje në javë\nGrup i përshtatur për moshën 6-12\nVëmendje individuale nga trajneri\nZhvillim i disiplinës dhe vetëbesimit",
+        },
+        en: {
+          name: "Kids",
+          price: "€25",
+          period: "/ month",
+          features: "2 training sessions per week\nAge-appropriate group (6-12)\nIndividual attention from the trainer\nBuilds discipline and self-confidence",
+        },
+        de: {
+          name: "Kids",
+          price: "25€",
+          period: "/ Monat",
+          features: "2 Trainingseinheiten pro Woche\nAltersgerechte Gruppe (6-12)\nIndividuelle Betreuung durch den Trainer\nFördert Disziplin und Selbstvertrauen",
+        },
+      },
+    },
+    {
+      t: {
+        sq: {
+          name: "Të Rinj",
+          price: "30€",
+          period: "/ muaj",
+          features: "3 orë stërvitje në javë\nFokus te vetëmbrojtja praktike\nZhvillim fizik dhe mendor\nAkses në ngjarje dhe seminare",
+        },
+        en: {
+          name: "Teens",
+          price: "€30",
+          period: "/ month",
+          features: "3 training sessions per week\nFocus on practical self-defense\nPhysical and mental development\nAccess to events and seminars",
+        },
+        de: {
+          name: "Jugendliche",
+          price: "30€",
+          period: "/ Monat",
+          features: "3 Trainingseinheiten pro Woche\nFokus auf praktische Selbstverteidigung\nKörperliche und geistige Entwicklung\nZugang zu Events und Seminaren",
+        },
+      },
+    },
+    {
+      t: {
+        sq: {
+          name: "Të Rritur",
+          price: "35€",
+          period: "/ muaj",
+          features: "Orare fleksibël (paradite/pasdite/mbrëmje)\nTeknika reale vetëmbrojtjeje\nKondicion fizik dhe çlirim stresi\nProgresim nëpër nivele/grada",
+        },
+        en: {
+          name: "Adults",
+          price: "€35",
+          period: "/ month",
+          features: "Flexible schedule (morning/afternoon/evening)\nReal self-defense techniques\nFitness and stress relief\nProgress through levels/ranks",
+        },
+        de: {
+          name: "Erwachsene",
+          price: "35€",
+          period: "/ Monat",
+          features: "Flexibler Zeitplan (vormittags/nachmittags/abends)\nReale Selbstverteidigungstechniken\nFitness und Stressabbau\nFortschritt durch Levels/Grade",
+        },
+      },
+    },
+  ];
+
+  const pricingCount = await prisma.pricingPlan.count();
+  if (pricingCount === 0) {
+    for (let i = 0; i < pricingData.length; i++) {
+      const plan = await prisma.pricingPlan.create({ data: { order: i } });
+      for (const locale of Object.keys(pricingData[i].t) as Locale[]) {
+        const { name, price, period, features } = pricingData[i].t[locale];
+        await prisma.pricingPlanTranslation.create({
+          data: { planId: plan.id, locale, name, price, period, features },
+        });
+      }
+    }
+  }
+
+  // ---------- About page ----------
+  await upsertSiteText("about_page", {
+    sq: {
+      title: "Rreth Samir Wing Tsun System",
+      body: "Samir Wing Tsun System është një shkollë e artit të vetëmbrojtjes Wing Tsun në Ferizaj, e themeluar dhe udhëhequr nga Sifu Samir Ibishi. Që nga hapja, kemi trajnuar qindra studentë — nga fëmijë deri te të rritur — duke ndërtuar jo vetëm aftësi fizike, por edhe disiplinë, respekt dhe vetëbesim.\n\nMisioni ynë është t'i ofrojmë çdo studenti mjetet për t'u mbrojtur, për t'u ndjerë më të fortë dhe për të jetuar një jetë më të shëndetshme e të balancuar.",
+    },
+    en: {
+      title: "About Samir Wing Tsun System",
+      body: "Samir Wing Tsun System is a Wing Tsun self-defense school in Ferizaj, founded and led by Sifu Samir Ibishi. Since opening, we have trained hundreds of students — from kids to adults — building not just physical skill, but discipline, respect and self-confidence.\n\nOur mission is to give every student the tools to protect themselves, feel stronger, and live a healthier, more balanced life.",
+    },
+    de: {
+      title: "Über Samir Wing Tsun System",
+      body: "Samir Wing Tsun System ist eine Wing-Tsun-Selbstverteidigungsschule in Ferizaj, gegründet und geleitet von Sifu Samir Ibishi. Seit der Eröffnung haben wir Hunderte von Schülern trainiert — vom Kind bis zum Erwachsenen — und dabei nicht nur körperliche Fähigkeiten, sondern auch Disziplin, Respekt und Selbstvertrauen aufgebaut.\n\nUnsere Mission ist es, jedem Schüler die Werkzeuge zu geben, sich zu schützen, sich stärker zu fühlen und ein gesünderes, ausgeglicheneres Leben zu führen.",
+    },
+  });
 
   console.log("Seed complete. Admin login ->", username, "/", password);
 }

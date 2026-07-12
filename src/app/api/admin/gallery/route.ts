@@ -10,6 +10,7 @@ export async function GET() {
 const schema = z.object({
   url: z.string().min(1).max(500),
   caption: z.string().max(200).optional().nullable(),
+  category: z.enum(["general", "hall", "group"]).default("general"),
   order: z.number().int().min(0).default(0),
 });
 

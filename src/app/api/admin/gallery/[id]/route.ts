@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 
 const schema = z.object({
   caption: z.string().max(200).optional().nullable(),
+  category: z.enum(["general", "hall", "group"]).optional(),
   order: z.number().int().min(0),
 });
 

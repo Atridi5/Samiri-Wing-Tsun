@@ -14,11 +14,12 @@ export default async function Footer() {
   const footerText = await getSiteText("footer", locale);
 
   const links = [
-    { href: "#about", label: t("nav.about") },
-    { href: "#programs", label: t("nav.programs") },
-    { href: "#gallery", label: t("nav.gallery") },
-    { href: "#location", label: t("nav.location") },
-    { href: "#contact", label: t("nav.contact") },
+    { href: "/about", label: t("nav.about") },
+    { href: "/pricing", label: t("nav.pricing") },
+    { href: "/#programs", label: t("nav.programs") },
+    { href: "/#gallery", label: t("nav.gallery") },
+    { href: "/#location", label: t("nav.location") },
+    { href: "/#contact", label: t("nav.contact") },
   ];
 
   return (
@@ -67,9 +68,15 @@ export default async function Footer() {
           <ul className="mt-4 space-y-2.5 text-sm">
             {links.map((link) => (
               <li key={link.href}>
-                <a href={link.href} className="transition-colors hover:text-gold-400">
-                  {link.label}
-                </a>
+                {link.href.startsWith("/#") ? (
+                  <a href={link.href} className="transition-colors hover:text-gold-400">
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link href={link.href} className="transition-colors hover:text-gold-400">
+                    {link.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

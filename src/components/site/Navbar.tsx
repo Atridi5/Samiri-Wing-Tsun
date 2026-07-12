@@ -7,11 +7,12 @@ export default async function Navbar() {
   const contact = await getContactInfo();
 
   const links = [
-    { href: "#about", label: t("about") },
-    { href: "#programs", label: t("programs") },
-    { href: "#gallery", label: t("gallery") },
-    { href: "#location", label: t("location") },
-    { href: "#contact", label: t("contact") },
+    { href: "/about", label: t("about") },
+    { href: "/pricing", label: t("pricing") },
+    { href: "/#programs", label: t("programs") },
+    { href: "/#gallery", label: t("gallery") },
+    { href: "/#location", label: t("location") },
+    { href: "/#contact", label: t("contact") },
   ];
 
   return (

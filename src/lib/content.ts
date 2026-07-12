@@ -58,8 +58,25 @@ export async function getTestimonials(locale: Locale) {
   }));
 }
 
-export async function getGallery() {
-  return prisma.galleryImage.findMany({ orderBy: { order: "asc" } });
+export async function getGallery(category?: string) {
+  return prisma.galleryImage.findMany({
+    where: category ? { category } : undefined,
+    orderBy: { order: "asc" },
+  });
+}
+
+export async function getPricingPlans(locale: Locale) {
+  const plans = await prisma.pricingPlan.findMany({
+    orderBy: { order: "asc" },
+    include: { translations: { where: { locale } } },
+  });
+  return plans.map((p) => ({
+    id: p.id,
+    name: p.translations[0]?.name ?? "",
+    price: p.translations[0]?.price ?? "",
+    period: p.translations[0]?.period ?? "",
+    features: (p.translations[0]?.features ?? "").split("\n").filter(Boolean),
+  }));
 }
 
 export async function getContactInfo() {

@@ -11,11 +11,29 @@
   "nav": {
     "home": "Ballina",
     "about": "Rreth Nesh",
+    "pricing": "Çmimorja",
     "programs": "Programet",
     "gallery": "Galeria",
     "location": "Lokacioni",
     "contact": "Kontakt",
     "cta": "Regjistrohu"
+  },
+  "pricing": {
+    "sectionLabel": "Çmimorja",
+    "title": "Paketat dhe Çmimet",
+    "subtitle": "Zgjidh paketën që të përshtatet dhe fillo stërvitjen sot.",
+    "cta": "Regjistrohu",
+    "empty": "Çmimet do të shtohen së shpejti. Na kontakto direkt për informacion."
+  },
+  "aboutPage": {
+    "sectionLabel": "Rreth Nesh",
+    "fallbackTitle": "Samir Wing Tsun System",
+    "fallbackBody": "Samir Wing Tsun System është një shkollë e artit të vetëmbrojtjes Wing Tsun në Ferizaj, e themeluar dhe udhëhequr nga Sifu Samir Ibishi. Ofrojmë trajnime për fëmijë, të rinj dhe të rritur, në një mjedis profesional dhe motivues.",
+    "videoLabel": "Video",
+    "hallLabel": "Salla Jonë",
+    "hallTitle": "Ambienti i Stërvitjes",
+    "groupLabel": "Grupet",
+    "groupTitle": "Studentët Tanë Në Veprim"
   },
   "hero": {
     "ctaPrimary": "Regjistrohu Tani",

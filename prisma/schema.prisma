@@ -84,8 +84,28 @@ model GalleryImage {
   id        String   @id @default(cuid())
   url       String
   caption   String?
+  category  String   @default("general")
   order     Int      @default(0)
   createdAt DateTime @default(now())
+}
+
+model PricingPlan {
+  id           String                   @id @default(cuid())
+  order        Int                      @default(0)
+  translations PricingPlanTranslation[]
+}
+
+model PricingPlanTranslation {
+  id       String      @id @default(cuid())
+  planId   String
+  plan     PricingPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  locale   String
+  name     String
+  price    String
+  period   String
+  features String
+
+  @@unique([planId, locale])
 }
 
 model ContactMessage {

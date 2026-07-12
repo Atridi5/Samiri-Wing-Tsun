@@ -81,15 +81,25 @@ export default function NavbarClient({
           </Link>
 
           <div className="hidden items-center gap-7 lg:flex">
-            {links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-navy-800/75 transition-colors hover:text-gold-600"
-              >
-                {link.label}
-              </a>
-            ))}
+            {links.map((link) =>
+              link.href.startsWith("/#") ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-medium text-navy-800/75 transition-colors hover:text-gold-600"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-medium text-navy-800/75 transition-colors hover:text-gold-600"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </div>
 
           <div className="hidden items-center gap-4 lg:flex">
@@ -116,16 +126,27 @@ export default function NavbarClient({
         {open && (
           <div className="border-t border-navy-900/10 bg-cream-50 px-6 py-5 lg:hidden">
             <div className="flex flex-col gap-4">
-              {links.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="text-sm font-medium text-navy-800/80 hover:text-gold-600"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {links.map((link) =>
+                link.href.startsWith("/#") ? (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="text-sm font-medium text-navy-800/80 hover:text-gold-600"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="text-sm font-medium text-navy-800/80 hover:text-gold-600"
+                  >
+                    {link.label}
+                  </Link>
+                )
+              )}
               <a
                 href="/admin/login"
                 onClick={() => setOpen(false)}

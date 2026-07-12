@@ -4,7 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Upload, Trash2, Loader2, ArrowUp, ArrowDown } from "lucide-react";
 
-type GalleryImage = { id: string; url: string; caption: string | null; order: number };
+type GalleryImage = { id: string; url: string; caption: string | null; category: string; order: number };
+
+const CATEGORIES = [
+  { value: "general", label: "Përgjithshme" },
+  { value: "hall", label: "Salla" },
+  { value: "group", label: "Grupet" },
+];
 
 export default function GalleryPage() {
   const [images, setImages] = useState<GalleryImage[]>([]);
@@ -41,7 +47,7 @@ export default function GalleryPage() {
     const createRes = await fetch("/api/admin/gallery", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ url, caption: "", order: images.length }),
+      body: JSON.stringify({ url, caption: "", category: "general", order: images.length }),
     });
     setUploading(false);
     if (createRes.ok) {
@@ -65,7 +71,16 @@ export default function GalleryPage() {
     await fetch(`/api/admin/gallery/${image.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ caption: image.caption, order: image.order }),
+      body: JSON.stringify({ caption: image.caption, category: image.category, order: image.order }),
+    });
+  }
+
+  async function handleCategoryChange(image: GalleryImage, category: string) {
+    setImages((prev) => prev.map((img) => (img.id === image.id ? { ...img, category } : img)));
+    await fetch(`/api/admin/gallery/${image.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ caption: image.caption, category, order: image.order }),
     });
   }
 
@@ -81,7 +96,7 @@ export default function GalleryPage() {
         fetch(`/api/admin/gallery/${img.id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ caption: img.caption, order: img.order }),
+          body: JSON.stringify({ caption: img.caption, category: img.category, order: img.order }),
         })
       )
     );
@@ -123,6 +138,17 @@ export default function GalleryPage() {
                 placeholder="Përshkrimi (opsional)"
                 className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-[#d4af37]"
               />
+              <select
+                value={image.category}
+                onChange={(e) => handleCategoryChange(image, e.target.value)}
+                className="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-[#d4af37]"
+              >
+                {CATEGORIES.map((c) => (
+                  <option key={c.value} value={c.value}>
+                    {c.label}
+                  </option>
+                ))}
+              </select>
               <div className="mt-3 flex items-center justify-between">
                 <div className="flex gap-1">
                   <button
