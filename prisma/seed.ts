@@ -136,6 +136,60 @@ async function main() {
     de: { body: "Alle Rechte vorbehalten." },
   });
 
+  await upsertSiteText("rules", {
+    sq: {
+      title: "Rregullat",
+      body: [
+        "Të gjithë pjesëmarrësit duhet të respektojnë instruktorin, bashkëtrajnuesit dhe rregullat e sallës.",
+        "Të respektohet rregulla e uniformës (maica e Samir Wing Tsun System, trenerka të gjatë të zeza), si dhe përdorimi i pajisjeve mbrojtëse kur kërkohet nga instruktori.",
+        "Ndalohet nënçmimi, nënvlerësimi ose talljja me pjesëmarrës të stileve apo arteve të tjera marciale.",
+        "Sjellje agresive apo provokuese janë të ndaluara gjatë stërvitjeve. Në rast shkeljeje, pjesëmarrësi paralajmërohet, ndërsa pas tri paralajmërimeve përjashtohet nga trajnimi.",
+        "Trajneri ka të drejtë të përjashtojë menjëherë nga trajnimi çdo pjesëmarrës që është nën ndikimin e alkoolit ose drogave.",
+        "Nëse një pjesëmarrës nuk mund të vijë në trajnim, duhet ta njoftojë instruktorin me kohë.",
+        "Gjatë trajnimit nuk lejohet përdorimi i telefonit celular. Në rast telefonatash urgjente, përgjigjuni jashtë sallës së stërvitjes.",
+        "Teknikat dhe mësimet e Samir Wing Tsun System përdoren vetëm për vetëmbrojtje, në përputhje me ligjin.",
+        "Teknikat dhe mësimet nuk lejohen t'u mësohen personave të tjerë jashtë shkollës pa lejen e instruktorit.",
+        "Lëndimet e vogla që mund të ndodhin gjatë stërvitjeve, si pjesë e aktiviteteve sportive, duhet të pranohen; instruktori kujdeset që rreziku të minimizohet sa më shumë.",
+        "Në raste të veçanta të shkeljes së rregullave, instruktori ka të drejtë t'ia ndalojë pjesëmarrjen dhe/ose ta shpallë të pavlefshme diplomën apo gradën e personit.",
+        "Trajnimet zhvillohen 3 herë në javë, ndërsa pagesa bëhet në fillim të çdo muaji.",
+      ].join("\n"),
+    },
+    en: {
+      title: "Rules",
+      body: [
+        "All participants must respect the instructor, fellow trainees and the hall's rules.",
+        "The uniform rule must be respected (Samir Wing Tsun System t-shirt, long black training pants), as well as wearing protective gear when required by the instructor.",
+        "Belittling, underestimating or mocking practitioners of other styles or martial arts is prohibited.",
+        "Aggressive or provocative behavior is not allowed during training. In case of violation, the participant is warned; after three warnings, they are excluded from training.",
+        "The instructor has the right to immediately exclude from training any participant under the influence of alcohol or drugs.",
+        "If a participant cannot attend training, they must notify the instructor in advance.",
+        "Mobile phone use is not allowed during training. For urgent calls, please step outside the training hall.",
+        "Samir Wing Tsun System techniques and teachings are to be used only for self-defense, in accordance with the law.",
+        "Techniques and teachings may not be taught to others outside the school without the instructor's permission.",
+        "Minor injuries that may occur during training, as part of sports activities, must be accepted; the instructor works to minimize risk as much as possible.",
+        "In special cases of rule violations, the instructor has the right to deny participation and/or invalidate the person's diploma or rank.",
+        "Training sessions are held 3 times a week, with payment due at the start of each month.",
+      ].join("\n"),
+    },
+    de: {
+      title: "Regeln",
+      body: [
+        "Alle Teilnehmer müssen den Instruktor, die Mittrainierenden und die Regeln der Halle respektieren.",
+        "Die Uniformregel ist einzuhalten (Samir Wing Tsun System T-Shirt, lange schwarze Trainingshose), ebenso das Tragen von Schutzausrüstung, wenn vom Instruktor verlangt.",
+        "Herabwürdigung, Unterschätzung oder Verspottung von Praktizierenden anderer Stile oder Kampfkünste ist untersagt.",
+        "Aggressives oder provokantes Verhalten ist während des Trainings nicht erlaubt. Bei Verstoß wird der Teilnehmer verwarnt; nach drei Verwarnungen erfolgt der Ausschluss vom Training.",
+        "Der Instruktor hat das Recht, jeden Teilnehmer, der unter Alkohol- oder Drogeneinfluss steht, sofort vom Training auszuschließen.",
+        "Kann ein Teilnehmer nicht am Training teilnehmen, muss er den Instruktor rechtzeitig informieren.",
+        "Die Nutzung von Mobiltelefonen ist während des Trainings nicht erlaubt. Bei dringenden Anrufen bitte die Trainingshalle verlassen.",
+        "Die Techniken und Lehren von Samir Wing Tsun System dürfen nur zur Selbstverteidigung, im Einklang mit dem Gesetz, genutzt werden.",
+        "Techniken und Lehren dürfen ohne Erlaubnis des Instruktors nicht an Dritte außerhalb der Schule weitergegeben werden.",
+        "Kleinere Verletzungen, die während des Trainings als Teil sportlicher Aktivitäten auftreten können, sind zu akzeptieren; der Instruktor bemüht sich, das Risiko so weit wie möglich zu minimieren.",
+        "In besonderen Fällen von Regelverstößen hat der Instruktor das Recht, die Teilnahme zu verweigern und/oder das Diplom bzw. den Rang der Person für ungültig zu erklären.",
+        "Die Trainingseinheiten finden 3-mal pro Woche statt, die Zahlung erfolgt zu Beginn jedes Monats.",
+      ].join("\n"),
+    },
+  });
+
   // ---------- Programs ----------
   const programsData: {
     slug: string;

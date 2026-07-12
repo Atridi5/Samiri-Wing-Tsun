@@ -13,10 +13,32 @@
     "about": "Rreth Nesh",
     "pricing": "Çmimorja",
     "programs": "Programet",
-    "gallery": "Galeria",
+    "rules": "Rregullat",
     "location": "Lokacioni",
     "contact": "Kontakt",
     "cta": "Regjistrohu"
+  },
+  "rules": {
+    "sectionLabel": "Rregullat e Sallës",
+    "fallbackTitle": "Rregullat",
+    "footer": "Disiplinë, respekt, vetëmbrojtje, vetëbesim",
+    "empty": "Rregullat do të shtohen së shpejti."
+  },
+  "stats": {
+    "students": "Studentë",
+    "years": "Vite Përvojë",
+    "groups": "Grupmosha",
+    "weekly": "Stërvitje në Javë"
+  },
+  "howItWorks": {
+    "sectionLabel": "Si Funksionon",
+    "title": "Fillo në 3 Hapa të Thjeshtë",
+    "step1Title": "Regjistrohu",
+    "step1Body": "Plotëso formularin e shkurtër të regjistrimit — zgjedh grupmoshën dhe stafi ynë të kontakton.",
+    "step2Title": "Dita e Parë Falas",
+    "step2Body": "Eja në sallë dhe provo një stërvitje reale, plotësisht falas, pa asnjë detyrim.",
+    "step3Title": "Fillo Stërvitjen",
+    "step3Body": "Nëse të pëlqen, bashkohu me grupin tënd dhe fillo udhëtimin në Wing Tsun."
   },
   "pricing": {
     "sectionLabel": "Çmimorja",

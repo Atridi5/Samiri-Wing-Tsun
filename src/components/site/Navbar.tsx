@@ -10,7 +10,7 @@ export default async function Navbar() {
     { href: "/about", label: t("about") },
     { href: "/pricing", label: t("pricing") },
     { href: "/#programs", label: t("programs") },
-    { href: "/#gallery", label: t("gallery") },
+    { href: "/rules", label: t("rules") },
     { href: "/#location", label: t("location") },
     { href: "/#contact", label: t("contact") },
   ];

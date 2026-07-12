@@ -6,7 +6,8 @@ import Hero from "@/components/site/Hero";
 import AboutSection from "@/components/site/AboutSection";
 import ComparisonSection from "@/components/site/ComparisonSection";
 import ProgramsSection from "@/components/site/ProgramsSection";
-import GallerySection from "@/components/site/GallerySection";
+import StatsSection from "@/components/site/StatsSection";
+import HowItWorksSection from "@/components/site/HowItWorksSection";
 import TestimonialsSection from "@/components/site/TestimonialsSection";
 import LocationSection from "@/components/site/LocationSection";
 import ContactSection from "@/components/site/ContactSection";
@@ -24,7 +25,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <AboutSection />
       <ComparisonSection />
       <ProgramsSection />
-      <GallerySection />
+      <StatsSection />
+      <HowItWorksSection />
       <TestimonialsSection />
       <LocationSection />
       <ContactSection />

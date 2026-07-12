@@ -13,10 +13,32 @@
     "about": "Über Uns",
     "pricing": "Preise",
     "programs": "Programme",
-    "gallery": "Galerie",
+    "rules": "Regeln",
     "location": "Standort",
     "contact": "Kontakt",
     "cta": "Jetzt Anmelden"
+  },
+  "rules": {
+    "sectionLabel": "Regeln der Halle",
+    "fallbackTitle": "Regeln",
+    "footer": "Disziplin, Respekt, Selbstverteidigung, Selbstvertrauen",
+    "empty": "Regeln werden bald hinzugefügt."
+  },
+  "stats": {
+    "students": "Schüler",
+    "years": "Jahre Erfahrung",
+    "groups": "Altersgruppen",
+    "weekly": "Trainings pro Woche"
+  },
+  "howItWorks": {
+    "sectionLabel": "So funktioniert's",
+    "title": "Starte in 3 einfachen Schritten",
+    "step1Title": "Anmelden",
+    "step1Body": "Fülle das kurze Anmeldeformular aus — wähle deine Altersgruppe, und unser Team meldet sich.",
+    "step2Title": "Erster Tag Kostenlos",
+    "step2Body": "Komm in die Halle und probiere ein echtes Training, komplett kostenlos, ohne Verpflichtung.",
+    "step3Title": "Training Starten",
+    "step3Body": "Wenn es dir gefällt, schließe dich deiner Gruppe an und starte deine Wing-Tsun-Reise."
   },
   "pricing": {
     "sectionLabel": "Preise",

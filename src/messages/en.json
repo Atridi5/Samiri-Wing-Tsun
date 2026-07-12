@@ -13,10 +13,32 @@
     "about": "About",
     "pricing": "Pricing",
     "programs": "Programs",
-    "gallery": "Gallery",
+    "rules": "Rules",
     "location": "Location",
     "contact": "Contact",
     "cta": "Join Now"
+  },
+  "rules": {
+    "sectionLabel": "Gym Rules",
+    "fallbackTitle": "Rules",
+    "footer": "Discipline, respect, self-defense, self-confidence",
+    "empty": "Rules will be added soon."
+  },
+  "stats": {
+    "students": "Students",
+    "years": "Years of Experience",
+    "groups": "Age Groups",
+    "weekly": "Sessions per Week"
+  },
+  "howItWorks": {
+    "sectionLabel": "How It Works",
+    "title": "Get Started in 3 Simple Steps",
+    "step1Title": "Sign Up",
+    "step1Body": "Fill in the short registration form — pick your age group and our team will reach out.",
+    "step2Title": "Free First Day",
+    "step2Body": "Come to the gym and try a real training session, completely free, no commitment.",
+    "step3Title": "Start Training",
+    "step3Body": "If you like it, join your group and start your Wing Tsun journey."
   },
   "pricing": {
     "sectionLabel": "Pricing",

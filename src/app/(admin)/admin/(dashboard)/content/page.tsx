@@ -22,7 +22,7 @@ const SECTIONS: { key: string; label: string; fields: (keyof TextValue)[] }[] = 
   { key: "comparison", label: "Krahasimi: Pasiv vs Aktiv", fields: ["title", "subtitle"] },
   { key: "programs", label: "Programet — Titull", fields: ["title", "body"] },
   { key: "kids_section", label: "Seksioni për Fëmijë", fields: ["title", "body"] },
-  { key: "gallery", label: "Galeria — Titull", fields: ["title", "body"] },
+  { key: "rules", label: "Rregullat e Sallës (një rregull për rresht te 'Përmbajtja')", fields: ["title", "body"] },
   { key: "location", label: "Lokacioni — Titull", fields: ["title", "body"] },
   { key: "cta", label: "Kontakt — CTA", fields: ["title", "subtitle", "body"] },
   { key: "footer", label: "Footer", fields: ["body"] },
