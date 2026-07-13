@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { unlink } from "node:fs/promises";
-import path from "node:path";
 import { prisma } from "@/lib/prisma";
+import cloudinary from "@/lib/cloudinary";
 
 const schema = z.object({
   caption: z.string().max(200).optional().nullable(),
@@ -25,9 +24,12 @@ export async function DELETE(_request: NextRequest, context: { params: Promise<{
   const { id } = await context.params;
   const image = await prisma.galleryImage.delete({ where: { id } });
 
-  if (image.url.startsWith("/uploads/")) {
-    const filePath = path.join(process.cwd(), "public", image.url);
-    await unlink(filePath).catch(() => {});
+  if (image.url.includes("res.cloudinary.com")) {
+    const match = image.url.match(/\/upload\/(?:v\d+\/)?(.+)\.\w+$/);
+    const publicId = match?.[1];
+    if (publicId) {
+      await cloudinary.uploader.destroy(publicId).catch(() => {});
+    }
   }
 
   return NextResponse.json({ ok: true });

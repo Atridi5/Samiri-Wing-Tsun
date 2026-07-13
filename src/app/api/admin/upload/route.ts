@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir } from "node:fs/promises";
-import path from "node:path";
-import crypto from "node:crypto";
+import cloudinary from "@/lib/cloudinary";
 
 const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
 const MAX_SIZE = 8 * 1024 * 1024; // 8MB
@@ -20,13 +18,22 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "file_too_large" }, { status: 400 });
   }
 
-  const ext = file.type === "image/jpeg" ? "jpg" : file.type.split("/")[1];
-  const filename = `${crypto.randomUUID()}.${ext}`;
-  const uploadsDir = path.join(process.cwd(), "public", "uploads");
-  await mkdir(uploadsDir, { recursive: true });
-
   const buffer = Buffer.from(await file.arrayBuffer());
-  await writeFile(path.join(uploadsDir, filename), buffer);
 
-  return NextResponse.json({ url: `/uploads/${filename}` }, { status: 201 });
+  const result = await new Promise<{ secure_url: string; public_id: string }>((resolve, reject) => {
+    const uploadStream = cloudinary.uploader.upload_stream(
+      { folder: "samir-wing-tsun" },
+      (error, uploadResult) => {
+        if (error || !uploadResult) return reject(error ?? new Error("upload_failed"));
+        resolve({ secure_url: uploadResult.secure_url, public_id: uploadResult.public_id });
+      }
+    );
+    uploadStream.end(buffer);
+  }).catch(() => null);
+
+  if (!result) {
+    return NextResponse.json({ error: "upload_failed" }, { status: 502 });
+  }
+
+  return NextResponse.json({ url: result.secure_url, publicId: result.public_id }, { status: 201 });
 }
