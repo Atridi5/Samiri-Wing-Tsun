@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { getContactInfo, getSiteText } from "@/lib/content";
 import Image from "next/image";
+import NextLink from "next/link";
 import { Link } from "@/i18n/navigation";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { InstagramIcon, FacebookIcon } from "./SocialIcons";
@@ -128,9 +129,9 @@ export default async function Footer() {
           <p>
             &copy; {new Date().getFullYear()} Samir Wing Tsun System. {footerText.body || t("footer.rights")}
           </p>
-          <a href="/admin/login" className="hover:text-gold-400">
+          <NextLink href="/admin/login" className="hover:text-gold-400">
             Admin
-          </a>
+          </NextLink>
         </div>
       </div>
     </footer>

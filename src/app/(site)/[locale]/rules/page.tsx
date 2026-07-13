@@ -5,6 +5,8 @@ import { ShieldCheck } from "lucide-react";
 import { routing } from "@/i18n/routing";
 import { getSiteText, type Locale } from "@/lib/content";
 
+export const revalidate = 30;
+
 export default async function RulesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {

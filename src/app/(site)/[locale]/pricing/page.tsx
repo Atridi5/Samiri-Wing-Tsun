@@ -6,6 +6,8 @@ import { routing } from "@/i18n/routing";
 import { getPricingPlans, type Locale } from "@/lib/content";
 import RegisterButton from "@/components/site/RegisterButton";
 
+export const revalidate = 30;
+
 export default async function PricingPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {

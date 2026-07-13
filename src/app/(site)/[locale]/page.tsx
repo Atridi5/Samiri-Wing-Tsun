@@ -12,6 +12,8 @@ import TestimonialsSection from "@/components/site/TestimonialsSection";
 import LocationSection from "@/components/site/LocationSection";
 import ContactSection from "@/components/site/ContactSection";
 
+export const revalidate = 30;
+
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {

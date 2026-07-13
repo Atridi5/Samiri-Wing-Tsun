@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import NextLink from "next/link";
 import { Link } from "@/i18n/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { Menu, X, Phone, LogIn } from "lucide-react";
@@ -58,10 +59,10 @@ export default function NavbarClient({
                 <FacebookIcon className="h-3.5 w-3.5" />
               </a>
             )}
-            <a href="/admin/login" className="flex items-center gap-1.5 hover:text-gold-600">
+            <NextLink href="/admin/login" className="flex items-center gap-1.5 hover:text-gold-600">
               <LogIn className="h-3.5 w-3.5" />
               Kyçu si Admin
-            </a>
+            </NextLink>
           </div>
         </div>
       </div>
@@ -147,14 +148,14 @@ export default function NavbarClient({
                   </Link>
                 )
               )}
-              <a
+              <NextLink
                 href="/admin/login"
                 onClick={() => setOpen(false)}
                 className="flex items-center gap-2 text-sm font-medium text-navy-800/80 hover:text-gold-600"
               >
                 <LogIn className="h-4 w-4" />
                 Kyçu (Admin)
-              </a>
+              </NextLink>
               <div className="flex items-center justify-between pt-2">
                 <LanguageSwitcher variant="dark" />
                 <button
