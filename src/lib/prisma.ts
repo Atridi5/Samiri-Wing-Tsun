@@ -1,17 +1,12 @@
 import { PrismaClient } from "@prisma/client";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
-import path from "node:path";
-
-const dbUrl = process.env.DATABASE_URL ?? "file:./prisma/dev.db";
-const dbPath = dbUrl.replace(/^file:/, "");
-const resolvedPath = path.isAbsolute(dbPath)
-  ? dbPath
-  : path.join(process.cwd(), dbPath);
+import { PrismaNeon } from "@prisma/adapter-neon";
 
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
 function createClient() {
-  const adapter = new PrismaBetterSqlite3({ url: resolvedPath });
+  const connectionString = process.env.DATABASE_URL;
+  if (!connectionString) throw new Error("DATABASE_URL is not set");
+  const adapter = new PrismaNeon({ connectionString });
   return new PrismaClient({ adapter });
 }
 
