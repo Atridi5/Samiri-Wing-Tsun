@@ -59,6 +59,9 @@ export async function generateMetadata({
       description,
       images: ["/images/hero-training.jpg"],
     },
+    verification: {
+      google: "js3t85lYLl6_PqLQipS_MU43Tp8z-knV_V7P_JebdRQ",
+    },
   };
 }
 
