@@ -249,14 +249,6 @@ export default function RegistrationsPage() {
               </div>
             )}
 
-            {(reg.emergencyContactName || reg.emergencyContactPhone) && (
-              <p className="mt-3 text-sm text-slate-600">
-                <span className="font-semibold">Kontakt urgjence:</span> {reg.emergencyContactName}
-                {reg.emergencyContactName && reg.emergencyContactPhone && " · "}
-                {reg.emergencyContactPhone}
-              </p>
-            )}
-
             {reg.healthNotes && (
               <p className="mt-2 whitespace-pre-wrap rounded-lg bg-amber-50 p-2.5 text-sm text-amber-800 ring-1 ring-amber-200">
                 <span className="font-semibold">Shëndeti:</span> {reg.healthNotes}

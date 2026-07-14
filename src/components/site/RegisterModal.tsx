@@ -270,35 +270,11 @@ export default function RegisterModal({ open, onClose }: { open: boolean; onClos
                 </div>
               </fieldset>
 
-              {/* Kontakti i urgjencës dhe shëndeti */}
+              {/* Shëndeti */}
               <fieldset className="space-y-4">
                 <legend className="text-xs font-bold uppercase tracking-wide text-gold-600">
-                  {t("sectionEmergency")}
+                  {t("sectionHealth")}
                 </legend>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-navy-800/70">
-                      {t("emergencyContactName")}
-                    </label>
-                    <input
-                      name="emergencyContactName"
-                      type="text"
-                      maxLength={120}
-                      className="w-full rounded-lg border border-navy-900/15 px-4 py-2.5 text-sm text-navy-900 outline-none focus:border-gold-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-navy-800/70">
-                      {t("emergencyContactPhone")}
-                    </label>
-                    <input
-                      name="emergencyContactPhone"
-                      type="tel"
-                      maxLength={50}
-                      className="w-full rounded-lg border border-navy-900/15 px-4 py-2.5 text-sm text-navy-900 outline-none focus:border-gold-500"
-                    />
-                  </div>
-                </div>
                 <div>
                   <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-navy-800/70">
                     {t("healthNotes")}
