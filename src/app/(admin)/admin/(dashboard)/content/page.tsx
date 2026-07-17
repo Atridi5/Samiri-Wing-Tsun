@@ -26,6 +26,9 @@ const SECTIONS: { key: string; label: string; fields: (keyof TextValue)[] }[] = 
   { key: "location", label: "Lokacioni — Titull", fields: ["title", "body"] },
   { key: "cta", label: "Kontakt — CTA", fields: ["title", "subtitle", "body"] },
   { key: "footer", label: "Footer", fields: ["body"] },
+  { key: "how_it_works_step1", label: "Si Funksionon — Hapi 1", fields: ["title", "body"] },
+  { key: "how_it_works_step2", label: "Si Funksionon — Hapi 2", fields: ["title", "body"] },
+  { key: "how_it_works_step3", label: "Si Funksionon — Hapi 3", fields: ["title", "body"] },
 ];
 
 const FIELD_LABELS: Record<keyof TextValue, string> = {

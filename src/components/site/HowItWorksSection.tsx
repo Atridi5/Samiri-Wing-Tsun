@@ -1,14 +1,21 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { UserPlus, Gift, Sparkles } from "lucide-react";
 import RegisterButton from "./RegisterButton";
+import { getSiteText, type Locale } from "@/lib/content";
 
 export default async function HowItWorksSection() {
   const t = await getTranslations("howItWorks");
+  const locale = (await getLocale()) as Locale;
+  const [step1, step2, step3] = await Promise.all([
+    getSiteText("how_it_works_step1", locale),
+    getSiteText("how_it_works_step2", locale),
+    getSiteText("how_it_works_step3", locale),
+  ]);
 
   const steps = [
-    { icon: UserPlus, title: t("step1Title"), body: t("step1Body") },
-    { icon: Gift, title: t("step2Title"), body: t("step2Body") },
-    { icon: Sparkles, title: t("step3Title"), body: t("step3Body") },
+    { icon: UserPlus, title: step1.title || t("step1Title"), body: step1.body || t("step1Body") },
+    { icon: Gift, title: step2.title || t("step2Title"), body: step2.body || t("step2Body") },
+    { icon: Sparkles, title: step3.title || t("step3Title"), body: step3.body || t("step3Body") },
   ];
 
   return (
