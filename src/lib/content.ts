@@ -45,19 +45,6 @@ export async function getBenefits(category: string, locale: Locale) {
   }));
 }
 
-export async function getTestimonials(locale: Locale) {
-  const testimonials = await prisma.testimonial.findMany({
-    orderBy: { order: "asc" },
-    include: { translations: { where: { locale } } },
-  });
-  return testimonials.map((t) => ({
-    id: t.id,
-    name: t.name,
-    rating: t.rating,
-    text: t.translations[0]?.text ?? "",
-  }));
-}
-
 export async function getGallery(category?: string) {
   return prisma.galleryImage.findMany({
     where: category ? { category } : undefined,

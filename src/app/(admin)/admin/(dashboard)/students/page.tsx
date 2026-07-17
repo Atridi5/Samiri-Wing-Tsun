@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { Loader2, Phone, Mail, GraduationCap, Plus, Trash2, Pencil, X, Search } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Loader2, Phone, Mail, GraduationCap, Plus, Trash2, Pencil, X, Search, Award, Upload, ExternalLink } from "lucide-react";
 
 type Student = {
   id: string;
@@ -17,6 +17,8 @@ type Student = {
   emergencyContactPhone: string | null;
   healthNotes: string | null;
   notes: string | null;
+  diplomaUrl: string | null;
+  diplomaIssuedAt: string | null;
   joinedAt: string;
 };
 
@@ -118,6 +120,39 @@ export default function StudentsPage() {
     setItems((prev) => prev.filter((s) => s.id !== id));
   }
 
+  async function handleDiplomaFile(studentId: string, file: File) {
+    const formData = new FormData();
+    formData.append("file", file);
+    const uploadRes = await fetch("/api/admin/upload", { method: "POST", body: formData });
+    if (!uploadRes.ok) {
+      alert("Ngarkimi i diplomës dështoi.");
+      return;
+    }
+    const { url } = await uploadRes.json();
+    const diplomaRes = await fetch(`/api/admin/students/${studentId}/diploma`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ diplomaUrl: url }),
+    });
+    if (diplomaRes.ok) {
+      const updated = await diplomaRes.json();
+      setItems((prev) => prev.map((s) => (s.id === studentId ? updated : s)));
+    }
+  }
+
+  async function handleRemoveDiploma(studentId: string) {
+    if (!confirm("A je i sigurt që dëshiron ta heqësh diplomën?")) return;
+    const res = await fetch(`/api/admin/students/${studentId}/diploma`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ diplomaUrl: null }),
+    });
+    if (res.ok) {
+      const updated = await res.json();
+      setItems((prev) => prev.map((s) => (s.id === studentId ? updated : s)));
+    }
+  }
+
   const counts = {
     active: items.filter((s) => s.status === "active").length,
     paused: items.filter((s) => s.status === "paused").length,
@@ -200,6 +235,7 @@ export default function StudentsPage() {
               <th className="px-5 py-3">Kontakt</th>
               <th className="px-5 py-3">Mosha</th>
               <th className="px-5 py-3">Statusi</th>
+              <th className="px-5 py-3">Diplomë</th>
               <th className="px-5 py-3">Student që nga</th>
               <th className="px-5 py-3" />
             </tr>
@@ -234,6 +270,9 @@ export default function StudentsPage() {
                   <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${STATUS_COLOR[s.status]}`}>
                     {STATUS_OPTIONS.find((o) => o.value === s.status)?.label}
                   </span>
+                </td>
+                <td className="px-5 py-4">
+                  <DiplomaCell student={s} onUpload={handleDiplomaFile} onRemove={handleRemoveDiploma} />
                 </td>
                 <td className="px-5 py-4 text-slate-500">{new Date(s.joinedAt).toLocaleDateString("sq-AL")}</td>
                 <td className="px-5 py-4">
@@ -282,6 +321,59 @@ export default function StudentsPage() {
         />
       )}
     </div>
+  );
+}
+
+function DiplomaCell({
+  student,
+  onUpload,
+  onRemove,
+}: {
+  student: Student;
+  onUpload: (id: string, file: File) => Promise<void>;
+  onRemove: (id: string) => void;
+}) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
+  async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    await onUpload(student.id, file);
+    setUploading(false);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  }
+
+  if (student.diplomaUrl) {
+    return (
+      <div className="flex items-center gap-2">
+        <a
+          href={student.diplomaUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 hover:bg-emerald-100"
+        >
+          <Award className="h-3.5 w-3.5" /> Shiko <ExternalLink className="h-3 w-3" />
+        </a>
+        <button
+          type="button"
+          onClick={() => onRemove(student.id)}
+          className="text-red-400 hover:text-red-600"
+          aria-label="Hiq diplomën"
+        >
+          <Trash2 className="h-3.5 w-3.5" />
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <label className="flex w-fit cursor-pointer items-center gap-1.5 rounded-full border border-slate-200 px-2.5 py-1 text-xs font-medium text-slate-500 hover:border-[#d4af37] hover:text-[#8a6d1c]">
+      {uploading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Upload className="h-3.5 w-3.5" />}
+      {uploading ? "Duke ngarkuar..." : "Ngarko"}
+      <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleChange} disabled={uploading} />
+    </label>
   );
 }
 

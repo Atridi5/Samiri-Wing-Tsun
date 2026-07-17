@@ -2,18 +2,18 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Dumbbell, Sparkles, Images, MessageSquareText, Mail, UserPlus, GraduationCap } from "lucide-react";
+import { Dumbbell, Sparkles, Images, Award, Mail, UserPlus, GraduationCap } from "lucide-react";
 
 type Stats = {
   programs: number;
   benefits: number;
   gallery: number;
-  testimonials: number;
   messages: number;
   unreadMessages: number;
   registrations: number;
   newRegistrations: number;
   students: number;
+  diplomas: number;
 };
 
 export default function AdminOverviewPage() {
@@ -33,7 +33,7 @@ export default function AdminOverviewPage() {
     { label: "Programe", value: stats?.programs, icon: Dumbbell, href: "/admin/programs" },
     { label: "Përfitime", value: stats?.benefits, icon: Sparkles, href: "/admin/benefits" },
     { label: "Foto në Galeri", value: stats?.gallery, icon: Images, href: "/admin/gallery" },
-    { label: "Dëshmi", value: stats?.testimonials, icon: MessageSquareText, href: "/admin/testimonials" },
+    { label: "Diploma të Dhëna", value: stats?.diplomas, icon: Award, href: "/admin/students" },
   ];
 
   return (

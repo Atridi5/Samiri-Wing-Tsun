@@ -152,6 +152,8 @@ model Student {
   emergencyContactPhone String?
   healthNotes          String?
   notes                String?
+  diplomaUrl           String?
+  diplomaIssuedAt      DateTime?
   joinedAt             DateTime  @default(now())
   createdAt            DateTime  @default(now())
   updatedAt            DateTime  @updatedAt
