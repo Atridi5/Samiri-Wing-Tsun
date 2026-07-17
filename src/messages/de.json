@@ -74,9 +74,6 @@
   "gallery": {
     "sectionLabel": "Galerie"
   },
-  "testimonials": {
-    "sectionLabel": "Was Unsere Mitglieder Sagen"
-  },
   "location": {
     "sectionLabel": "Standort",
     "getDirections": "Route Anzeigen",
