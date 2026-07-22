@@ -22,6 +22,7 @@ export default async function Navbar() {
       phone={contact?.phone ?? ""}
       instagram={contact?.instagram ?? ""}
       facebook={contact?.facebook ?? ""}
+      tiktok={contact?.tiktok ?? ""}
     />
   );
 }

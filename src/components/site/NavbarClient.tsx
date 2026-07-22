@@ -6,7 +6,7 @@ import NextLink from "next/link";
 import { Link } from "@/i18n/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { Menu, X, Phone, LogIn } from "lucide-react";
-import { InstagramIcon, FacebookIcon } from "./SocialIcons";
+import { InstagramIcon, FacebookIcon, TiktokIcon } from "./SocialIcons";
 import RegisterModal from "./RegisterModal";
 
 type NavLink = { href: string; label: string };
@@ -17,12 +17,14 @@ export default function NavbarClient({
   phone,
   instagram,
   facebook,
+  tiktok,
 }: {
   links: NavLink[];
   ctaLabel: string;
   phone: string;
   instagram: string;
   facebook: string;
+  tiktok: string;
 }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -57,6 +59,11 @@ export default function NavbarClient({
             {facebook && (
               <a href={facebook} target="_blank" rel="noreferrer" className="hover:text-gold-600" aria-label="Facebook">
                 <FacebookIcon className="h-3.5 w-3.5" />
+              </a>
+            )}
+            {tiktok && (
+              <a href={tiktok} target="_blank" rel="noreferrer" className="hover:text-gold-600" aria-label="TikTok">
+                <TiktokIcon className="h-3.5 w-3.5" />
               </a>
             )}
             <NextLink href="/admin/login" className="flex items-center gap-1.5 hover:text-gold-600">

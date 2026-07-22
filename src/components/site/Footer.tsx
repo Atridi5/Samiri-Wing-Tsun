@@ -4,7 +4,7 @@ import Image from "next/image";
 import NextLink from "next/link";
 import { Link } from "@/i18n/navigation";
 import { Phone, Mail, MapPin } from "lucide-react";
-import { InstagramIcon, FacebookIcon } from "./SocialIcons";
+import { InstagramIcon, FacebookIcon, TiktokIcon } from "./SocialIcons";
 import type { Locale } from "@/lib/content";
 import { getLocale } from "next-intl/server";
 
@@ -57,6 +57,17 @@ export default async function Footer() {
                 aria-label="Facebook"
               >
                 <FacebookIcon className="h-4 w-4" />
+              </a>
+            )}
+            {contact?.tiktok && (
+              <a
+                href={contact.tiktok}
+                target="_blank"
+                rel="noreferrer"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-cream-50/15 transition-colors hover:border-gold-500 hover:text-gold-400"
+                aria-label="TikTok"
+              >
+                <TiktokIcon className="h-4 w-4" />
               </a>
             )}
           </div>
